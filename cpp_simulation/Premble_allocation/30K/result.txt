@@ -1,0 +1,6 @@
+rao2914
+Complete Time:29.14s
+Average Access Delay:1.1962
+30000
+collide probility:0.197431
+Drop rate:11.1933%

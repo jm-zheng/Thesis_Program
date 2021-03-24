@@ -1,0 +1,6 @@
+rao2207
+Complete Time:22.07s
+Average Access Delay:5.4999
+30000
+collide probility:0.18547
+Drop rate:0.296667%
