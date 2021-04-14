@@ -8,7 +8,7 @@ using namespace std;
 
 string directory_nMTCD ="10k";
 const int nMTCD = 10000;
-const int simRAo = 1000; // 1=10ms 20s
+const int simRAo = 2000; // 1=10ms 20s
 const int Backoff_D2D = 40; //D2D backoff
 const int Backoff_RA = 20; //RA backoff
 const int D2D_cycle =8; //D2D_cycle 80ms =8 RAO
@@ -300,7 +300,7 @@ int main()
         // }
 
 
-//--------RA(有問題  沒碰撞 Grant還夠 但會失敗)----------------------------------------------------------------------------------------
+//--------確認發起RA後的狀態-------------------------------------------------------------------------------------------
 
         for(int each_RAO_Pre_index=1 ;each_RAO_Pre_index<55 ;each_RAO_Pre_index++)
         {
