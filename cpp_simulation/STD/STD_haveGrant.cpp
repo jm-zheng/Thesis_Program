@@ -4,9 +4,9 @@
 #include <ctime>
 using namespace std;
 
-string directory_nMTCD ="10k";
-const int nMTCD=10000;
-const int simRAo = 1500; // 1=10ms
+string directory_nMTCD ="30k";
+const int nMTCD=30000;
+const int simRAo = 3000; // 1=10ms
 //const int interRAo = 5; // 10: index 3    5: index 6
 //const int cell_r = 1000;
 //const int d2d_r = 100;
@@ -262,6 +262,7 @@ int main()
 	}
 	file1.close();
 
+	cout <<"success"<< SuccessnMTCD <<" fail: "<<numMTCDfail << endl;
 	cout << "Average Access Delay:" << double(totaldelay) / double(SuccessnMTCD) / 100 << endl;//除以100專換成秒
 	cout << SuccessnMTCD+ numMTCDfail << endl;
 	cout <<"collide probility:"<<collide_probility/finish_RAO<<endl;
@@ -271,6 +272,7 @@ int main()
 	result_file.open("Have_Grant\\"+directory_nMTCD+"\\STD_withGrant_result.txt",fstream :: out);
 
 	result_file <<"rao"<<finish_RAO<<endl;
+	result_file <<"success"<< SuccessnMTCD <<" fail: "<<numMTCDfail << endl;
 	result_file << "Complete Time:" << static_cast<double>(finish_RAO) /100 << "s" << endl;
 	result_file  << "Average Access Delay:" << double(totaldelay) / double(SuccessnMTCD) /100 << endl;
 	result_file << SuccessnMTCD+ numMTCDfail << endl;

@@ -2,10 +2,10 @@
 
 using namespace std;
 
-string directory_nMTCD ="10k";
+string directory_nMTCD ="100k";
 const int nGroup =50; // group的數量
-const int nMTCD =10000;
-const int simRAo = 1500; // 1=10ms 20s
+const int nMTCD =100000;
+const int simRAo = 6500; // 1=10ms 20s
 const int Backoff_D2D = 40; //D2D backoff
 const int Backoff_RA = 20; //RA backoff
 const int D2D_cycle =8; //D2D_cycle 80ms =8 RAO
@@ -604,6 +604,7 @@ int main()
 	result_file.open("with_earlydection\\"+directory_nMTCD+"\\with_earlydection_result.txt",fstream :: out);
 
 	result_file <<"rao"<<finish_RAO<<endl;
+    result_file <<"success"<< Success_nMTCD <<" fail: "<<fail_nMTCD << endl;
 	result_file << "Complete Time:" << static_cast<double>(finish_RAO) /100 << "s" << endl;
 	result_file  << "Average Access Delay:" << double(totalMTCD_Access_delay) / double(Success_nMTCD) /100 << endl;
 	result_file << Success_nMTCD+ fail_nMTCD << endl;
