@@ -4,9 +4,9 @@
 #include <ctime>
 using namespace std;
 
-string directory_nMTCD ="10k";
-const int nMTCD=10000;
-const int simRAo = 1500; // 1=10ms
+string directory_nMTCD ="50k";
+const int nMTCD=50000;
+const int simRAo = 3500; // 1=10ms
 //const int interRAo = 5; // 10: index 3    5: index 6
 //const int cell_r = 1000;
 //const int d2d_r = 100;
@@ -230,7 +230,7 @@ int main()
 	}
 
 	fstream file1;
-	file1.open("No_Grant\\"+directory_nMTCD+"\\stdsuccessdevice.csv", fstream::out);
+	file1.open("No_Grant\\"+directory_nMTCD+"\\STD_withoutGrant_stdsuccessdevice.csv", fstream::out);
 	if (file1.is_open())
 	{
 		int SuccessnMTCDslotclu[simRAo] = { 0 };
@@ -242,7 +242,7 @@ int main()
 	}
 	file1.close();
 
-	file1.open("No_Grant\\"+directory_nMTCD+"\\PreStatus.csv" , fstream:: out);
+	file1.open("No_Grant\\"+directory_nMTCD+"\\STD_withoutGrant_PreStatus.csv" , fstream:: out);
 	file1<< "initate MTCD,emtpyPre,collidePre,successPre,grant fail,collide probility"<< endl;
 
 	for(int i=0;i<simRAo;i++)
@@ -253,7 +253,7 @@ int main()
 	}
 	file1.close();
 
-	file1.open("No_Grant\\"+directory_nMTCD+"\\RAtime.csv" , fstream:: out);
+	file1.open("No_Grant\\"+directory_nMTCD+"\\STD_withoutGrant_RAtime.csv" , fstream:: out);
 	file1<< "initateRA,firstRA,successRA,retranmission"<< endl;
 
 	for(int i=0;i<nMTCD;i++)
@@ -269,7 +269,7 @@ int main()
 	cout << "Drop rate:" << (double(numMTCDfail) / double(nMTCD)) * 100 << "%" << endl;
 
 	fstream result_file;
-	result_file.open("No_Grant\\"+directory_nMTCD+"\\result.txt",fstream :: out);
+	result_file.open("No_Grant\\"+directory_nMTCD+"\\STD_withoutGrant_result.txt",fstream :: out);
 
 	result_file <<"rao"<<finish_RAO<<endl;
 	result_file << "Complete Time:" << static_cast<double>(finish_RAO) /100 << "s" << endl;

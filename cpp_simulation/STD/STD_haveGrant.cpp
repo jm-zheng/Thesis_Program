@@ -136,6 +136,7 @@ int main()
 		cout <<endl;*/
 
 		if(used_Pre>number_grant) used_Pre=number_grant;
+		//cout<<endl<<"used_Pre:"<<used_Pre<<endl;
 //-------¤À°tgrant------------------------------------------------------------------
 
 		for (int c = 1; c < 55; ++c) {
@@ -155,7 +156,7 @@ int main()
 			}
 			else if (eachRAoPre[c] == 1) {   // ¸Ó­Ópreamble¥u¦³1­Ó³]³Æµoş
 				bool grant_check_index =0;
-				for( int x=0; x<used_Pre; x++)
+				for( int x=1; x<=used_Pre; x++)
 				{
 					if(c == eachRAOPre_transmit_shuffle[x] )
 					{
@@ -228,7 +229,7 @@ int main()
 	}
 
 	fstream file1;
-	file1.open("Have_Grant\\"+directory_nMTCD+"\\stdsuccessdevice.csv", fstream::out);
+	file1.open("Have_Grant\\"+directory_nMTCD+"\\STD_withGrant_stdsuccessdevice.csv", fstream::out);
 	if (file1.is_open())
 	{
 		int SuccessnMTCDslotclu[simRAo] = { 0 };
@@ -240,7 +241,7 @@ int main()
 	}
 	file1.close();
 
-	file1.open("Have_Grant\\"+directory_nMTCD+"\\PreStatus.csv" , fstream:: out);
+	file1.open("Have_Grant\\"+directory_nMTCD+"\\STD_withGrant_PreStatus.csv" , fstream:: out);
 	file1<< "initate MTCD,emtpyPre,collidePre,successPre,grant fail,collide probility"<< endl;
 
 	for(int i=0;i<simRAo;i++)
@@ -251,7 +252,7 @@ int main()
 	}
 	file1.close();
 
-	file1.open("Have_Grant\\"+directory_nMTCD+"\\RAtime.csv" , fstream:: out);
+	file1.open("Have_Grant\\"+directory_nMTCD+"\\STD_withGrant_RAtime.csv" , fstream:: out);
 	file1<< "initateRA,firstRA,successRA,retranmission"<< endl;
 
 	for(int i=0;i<nMTCD;i++)
@@ -267,7 +268,7 @@ int main()
 	cout << "Drop rate:" << (double(numMTCDfail) / double(nMTCD)) * 100 << "%" << endl;
 
 	fstream result_file;
-	result_file.open("Have_Grant\\"+directory_nMTCD+"\\result.txt",fstream :: out);
+	result_file.open("Have_Grant\\"+directory_nMTCD+"\\STD_withGrant_result.txt",fstream :: out);
 
 	result_file <<"rao"<<finish_RAO<<endl;
 	result_file << "Complete Time:" << static_cast<double>(finish_RAO) /100 << "s" << endl;
