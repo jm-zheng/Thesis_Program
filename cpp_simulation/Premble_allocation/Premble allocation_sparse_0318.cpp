@@ -6,9 +6,9 @@
 #include <vector>
 using namespace std;
 
-string directory_nMTCD ="10k";
-const int nMTCD = 10000;
-const int simRAo = 2000; // 1=10ms 20s
+string directory_nMTCD ="50k";
+const int nMTCD = 50000;
+const int simRAo = 4000; // 1=10ms 20s
 const int Backoff_D2D = 40; //D2D backoff
 const int Backoff_RA = 20; //RA backoff
 const int D2D_cycle =8; //D2D_cycle 80ms =8 RAO
@@ -97,7 +97,7 @@ int main()
 {
 	srand(2021);
     fstream D2D_request_file ;
-    D2D_request_file.open(directory_nMTCD+"\\D2D_request.csv", fstream::out);
+    D2D_request_file.open(directory_nMTCD+"\\PreambleAllocation_D2D_request.csv", fstream::out);
     for(int x=1; x<=16; x++)
     {
         D2D_request_file <<x<<",";
@@ -256,7 +256,7 @@ int main()
 		}
 
         int eachRAOPre_transmit[55]	={0},used_Pre=1; //  eachRAOPre_transmit:在RAO裡哪一個Pre發送 used_pre:總共有幾個pre發送
-		int number_grant=31 ;    // grant 30個限制 因為used_Pre從1開始
+		int number_grant=30 ;    // grant 30個限制 因為used_Pre從1開始
 
         for(int c=1 ; c<55 ; c++)
         {
@@ -298,7 +298,7 @@ int main()
         // {
         //    cout<<eachRAOPre_transmit_shuffle[each_RAO_Pre_index]<<endl;
         // }
-
+        //  cout<<endl<<"used_Pre:"<<used_Pre<<endl;
 
 //--------確認發起RA後的狀態-------------------------------------------------------------------------------------------
 
@@ -334,7 +334,7 @@ int main()
                         {
                             bool grant_check_index =0;
 
-                            for(int x=1 ; x<used_Pre;x++ )
+                            for(int x=1 ; x<=used_Pre;x++ )
                             {
                                 //  cout<<"Preamble:"<<MTCD_Table[i].Preamble_number<<"  vs  " <<eachRAOPre_transmit_shuffle[x]<<endl;
                                 if (MTCD_Table[i].Preamble_number == eachRAOPre_transmit_shuffle[x] )
@@ -396,7 +396,7 @@ int main()
 
     fstream nMTCD_file ;
 
-    nMTCD_file.open(directory_nMTCD+"\\RAtime.csv", fstream::out);
+    nMTCD_file.open(directory_nMTCD+"\\PreambleAllocation_RAtime.csv", fstream::out);
     if (nMTCD_file.is_open())
 	{
         nMTCD_file <<"MTCD_number,group,D2D_first_request_RAO,D2D_initate_request_RAO,nRequest_D2D,";
@@ -413,7 +413,7 @@ int main()
 
 
     fstream PreStatus_file;
-    PreStatus_file.open(directory_nMTCD+"\\PreStatus.csv", fstream::out);
+    PreStatus_file.open(directory_nMTCD+"\\PreambleAllocation_PreStatus.csv", fstream::out);
     if (PreStatus_file.is_open())
 	{
         PreStatus_file <<"initate MTCD,emtpyPre,collidePre,successPre,grant fail,collide probility"<<endl;
@@ -428,7 +428,7 @@ int main()
 
 
     fstream SuccessMTCD_cumulation_file;
-    SuccessMTCD_cumulation_file.open(directory_nMTCD+"\\SuccessMTCD.csv", fstream::out);
+    SuccessMTCD_cumulation_file.open(directory_nMTCD+"\\PreambleAllocation_SuccessMTCD.csv", fstream::out);
     if (SuccessMTCD_cumulation_file.is_open())
 	{
         SuccessMTCD_cumulation_file <<"SuccessMTCD"<<endl;
@@ -447,7 +447,7 @@ int main()
 	cout << "Drop rate:" << (double(fail_nMTCD) / double(nMTCD)) * 100 << "%" << endl;
 
 	fstream result_file;
-	result_file.open(directory_nMTCD+"\\result.txt",fstream :: out);
+	result_file.open(directory_nMTCD+"\\PreambleAllocation_result.txt",fstream :: out);
 
 	result_file <<"rao"<<finish_RAO<<endl;
 	result_file << "Complete Time:" << static_cast<double>(finish_RAO) /100 << "s" << endl;
