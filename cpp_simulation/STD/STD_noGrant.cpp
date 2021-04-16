@@ -6,7 +6,7 @@ using namespace std;
 
 string directory_nMTCD ="30k";
 const int nMTCD=30000;
-const int simRAo = 3000; // 1=10ms
+const int simRAo = 3600; // 1=10ms
 //const int interRAo = 5; // 10: index 3    5: index 6
 //const int cell_r = 1000;
 //const int d2d_r = 100;

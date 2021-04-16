@@ -1,14 +1,9 @@
-﻿#include <iostream>
-#include <math.h>
-#include<fstream>
-#include <cstdlib>
-#include <ctime>
-#include <vector>
+﻿#include<bits/stdc++.h>
 using namespace std;
 
-string directory_nMTCD ="30k";
-const int nMTCD = 30000;
-const int simRAo = 3000; // 1=10ms 20s
+string directory_nMTCD ="100k";
+const int nMTCD = 100000;
+const int simRAo = 6500; // 1=10ms 20s
 const int Backoff_D2D = 40; //D2D backoff
 const int Backoff_RA = 20; //RA backoff
 const int D2D_cycle =8; //D2D_cycle 80ms =8 RAO
@@ -301,7 +296,8 @@ int main()
         //  cout<<endl<<"used_Pre:"<<used_Pre<<endl;
 
 //--------確認發起RA後的狀態-------------------------------------------------------------------------------------------
-
+        vector<int> collision_Share_Preamble={48,49,50,51,52,53,54};  //每個RAO碰撞的Sharepmble 為了算出Collision
+        vector<int>::iterator collision_Share_Preamble_it;   //iterator of collision_Share_Preamble
         for(int each_RAO_Pre_index=1 ;each_RAO_Pre_index<55 ;each_RAO_Pre_index++)
         {
             if(each_RAO_Premble[each_RAO_Pre_index] ==0) PreStatus[1][Now_RAO]+=1;
@@ -315,8 +311,14 @@ int main()
 
                         if(each_RAO_Premble[each_RAO_Pre_index] > 1)
                         {
-                            PreStatus[2][Now_RAO] += 1;           //collision +1;
-                            MTCD_Table[i].nTransmit_RA +=1;
+                            collision_Share_Preamble_it = find(collision_Share_Preamble.begin(),collision_Share_Preamble.end(),MTCD_Table[i].Preamble_number);
+                            if( collision_Share_Preamble_it != collision_Share_Preamble.end()) //只要那個sharepreanle碰撞
+                            {
+                                collision_Share_Preamble.erase(collision_Share_Preamble_it); //刪除這次collision_Share_Preamble list中已經出現過碰撞ShearPreamble
+                                 PreStatus[2][Now_RAO] += 1;           //collision +1;
+                            }
+                            //cout <<Now_RAO <<"collision_Share_Preamble:"<<collision_Share_Preamble.size()<<endl;
+
 
 
                             if(MTCD_Table[i].nTransmit_RA<10)
@@ -351,7 +353,6 @@ int main()
                             if(grant_check_index == 0)
                             {
                                 PreStatus[4][Now_RAO]+=1;
-                                MTCD_Table[i].nTransmit_RA +=1;  // retransmit time +1
 
                                 if(MTCD_Table[i].nTransmit_RA< MAX_nTransmit_RA) MTCD_Table[i].D2D_initate_request_RAO = Now_RAO + (Backoff_RA/10);
 

@@ -414,7 +414,7 @@ int main()
                                  PreStatus[2][Now_RAO] += 1;           //collision +1;
                             }
                             //cout <<Now_RAO <<"collision_Share_Preamble:"<<collision_Share_Preamble.size()<<endl;
-                            MTCD_Table[i].nTransmit_RA +=1;
+
 
                             if(MTCD_Table[i].nTransmit_RA<10)
                             {
@@ -449,7 +449,7 @@ int main()
                             if(grant_check_index == 0)
                             {
                                 PreStatus[4][Now_RAO]+=1;
-                                MTCD_Table[i].nTransmit_RA +=1;  // retransmit time +1
+
 
                                 if(MTCD_Table[i].nTransmit_RA < MAX_nTransmit_RA)
                                 {
@@ -485,7 +485,6 @@ int main()
                             if(grant_check_index == 0)
                             {
                                 PreStatus[4][Now_RAO]+=1;
-                                MTCD_Table[i].nTransmit_RA +=1;  // retransmit time +1
 
                                 if(MTCD_Table[i].nTransmit_RA< MAX_nTransmit_RA)
                                 {
