@@ -1,6 +1,0 @@
-rao2276
-Complete Time:22.76s
-Average Access Delay:5.62642
-30000
-collide probility:0.19656
-Drop rate:1.62%

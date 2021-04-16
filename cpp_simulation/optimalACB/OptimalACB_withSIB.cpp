@@ -6,7 +6,7 @@ using namespace std;
 
 string directory_nMTCD ="50k";
 const int nMTCD=50000;
-const int simRAo = 3600; // 1=10ms
+const int simRAo = 3500; // 1=10ms
 //const int interRAo = 5; // 10: index 3    5: index 6
 //const int cell_r = 1000;
 //const int d2d_r = 100;
@@ -171,7 +171,7 @@ int main()
 			}
 			else if (eachRAoPre[c] == 1) {   // ∏”≠”preamble•u¶≥1≠”≥]≥∆µoè˛
 				bool grant_check_index =0;
-				for( int x=0; x<used_Pre; x++)
+				for( int x=1; x<=used_Pre; x++)
 				{
 					if(c == eachRAOPre_transmit_shuffle[x] )
 					{
@@ -248,7 +248,7 @@ int main()
 
 
 	fstream file1;
-	file1.open("Have_SIB\\"+directory_nMTCD+"\\Optimal_successdevice.csv", fstream::out);
+	file1.open("Have_SIB\\"+directory_nMTCD+"\\OptimalACB_withSIB_successdevice.csv", fstream::out);
 	if (file1.is_open())
 	{
 		int SuccessnMTCDslotclu[simRAo] = { 0 };
@@ -261,7 +261,7 @@ int main()
 	file1.close();
 
 
-	file1.open("Have_SIB\\"+directory_nMTCD+"\\PreStatus.csv" , fstream:: out);
+	file1.open("Have_SIB\\"+directory_nMTCD+"\\OptimalACB_withSIB_PreStatus.csv" , fstream:: out);
 	file1<< "initate MTCD,emtpyPre,collidePre,successPre,grant fail,collide probility,PACB,initate ACB"<< endl;
 
 	for(int i=0;i<simRAo;i++)
@@ -272,7 +272,7 @@ int main()
 	}
 	file1.close();
 
-	file1.open("Have_SIB\\"+directory_nMTCD+"\\RAtime.csv" , fstream:: out);
+	file1.open("Have_SIB\\"+directory_nMTCD+"\\OptimalACB_withSIB_RAtime.csv" , fstream:: out);
 	file1<< "initateRA,firstRA,successRA,retranmission"<< endl;
 
 	for(int i=0;i<nMTCD;i++)
@@ -290,7 +290,7 @@ int main()
 	cout << "Drop rate:" << (double(numMTCDfail) / double(nMTCD)) * 100 << "%" << endl;
 
 	fstream result_file;
-	result_file.open("Have_SIB\\"+directory_nMTCD+"\\result.txt",fstream :: out);
+	result_file.open("Have_SIB\\"+directory_nMTCD+"\\OptimalACB_withSIB_result.txt",fstream :: out);
 
 	result_file <<"rao"<<finish_RAO<<endl;
 	result_file << "Complete Time:" << static_cast<double>(finish_RAO) /100 << "s" << endl;
