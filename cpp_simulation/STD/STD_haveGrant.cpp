@@ -1,12 +1,9 @@
-#include <iostream>
-#include <math.h>
-#include<fstream>
-#include <ctime>
+#include<bits/stdc++.h>
 using namespace std;
 
-string directory_nMTCD ="30k";
-const int nMTCD=30000;
-const int simRAo = 3600; // 1=10ms
+string directory_nMTCD ="100k";
+const int nMTCD=100000;
+const int simRAo = 6500; // 1=10ms
 //const int interRAo = 5; // 10: index 3    5: index 6
 //const int cell_r = 1000;
 //const int d2d_r = 100;
@@ -22,7 +19,7 @@ int finish_RAO =0;
 int numMTCDfail = 0;
 float RAtime[4][nMTCD]={0}; //0: initiate RA time   1: first RA time    2: success RA time  3: RA retransmission times
 int PreStatus[5][simRAo]={0}; //0: number of device initiate RA    1: emtpyPre    2: colliPre    3: successPre 4:not ULgrant
-int beta_nMTCD[beta_RAo]={0}; // number of device initiate RA in beta_RAo;
+int beta_nMTCD[simRAo]={0}; // number of device initiate RA in beta_RAo;
 double beta_proability[beta_RAo]={0}; // proability of beta in RA
 double beta_proability_ac[beta_RAo]={0}; // ac_proability of beta in RA
 int SuccessnMTCD = 0;
@@ -233,10 +230,10 @@ int main()
 	if (file1.is_open())
 	{
 		int SuccessnMTCDslotclu[simRAo] = { 0 };
-		file1<<"success"<<endl;
+		file1<<"success,beta_nMTCD"<<endl;
 		for (int a = 0; a < simRAo; ++a) {
 			SuccessnMTCDslotclu[a] = SuccessnMTCDslotclu[a-1] + SuccessnMTCDslot[a];
-			file1 << SuccessnMTCDslotclu[a] << endl;
+			file1 << SuccessnMTCDslotclu[a] <<","<<beta_nMTCD[a]<< endl;
 		}
 	}
 	file1.close();
