@@ -1,7 +1,7 @@
 rao928
 success10000 fail: 0
 Complete Time:9.28s
-Average Access Delay:0.05
+Average Access Delay:0.162237
 10000
 collide probility:0
 Drop rate:0%

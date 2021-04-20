@@ -1,9 +1,9 @@
 ﻿#include<bits/stdc++.h>
 using namespace std;
 
-string directory_nMTCD ="100k";
-const int nMTCD = 100000;
-const int simRAo = 6500; // 1=10ms 20s
+string directory_nMTCD ="150K";
+const int nMTCD = 150000;
+const int simRAo = 8600; // 1=10ms 20s
 const int Backoff_D2D = 40; //D2D backoff
 const int Backoff_RA = 20; //RA backoff
 const int D2D_cycle =8; //D2D_cycle 80ms =8 RAO
@@ -391,7 +391,7 @@ int main()
 	{
 		if (MTCD_Table[i].RA_success_RAO != -1)//失敗率
 		{
-			totalMTCD_Access_delay += MTCD_Table[i].RA_success_RAO - MTCD_Table[i].RA_first_RAO;   // frist RA_RAO - Success RA_RAO
+			totalMTCD_Access_delay += MTCD_Table[i].RA_success_RAO - MTCD_Table[i].D2D_first_request_RAO;   // Success RA_RAO - D2D_first_request_RAO
 		}
 	}
 

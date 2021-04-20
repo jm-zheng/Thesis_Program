@@ -4,13 +4,13 @@
 #include <ctime>
 using namespace std;
 
-string directory_nMTCD ="30k";
-const int nMTCD=30000;
-const int simRAo = 3600; // 1=10ms
+string directory_nMTCD ="150K";
+const int nMTCD=150000;
+const int simRAo = 8600; // 1=10ms
 //const int interRAo = 5; // 10: index 3    5: index 6
 //const int cell_r = 1000;
 //const int d2d_r = 100;
-const int Backoff =960;//20:20ms 960=960ms
+const int Backoff =20;//20:20ms 960=960ms
 const int beta_a = 3;
 const int beta_b = 4;
 const int beta_RAo = 1000; // 1=10ms

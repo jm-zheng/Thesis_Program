@@ -1,7 +1,7 @@
 rao968
 success49885 fail: 115
 Complete Time:9.68s
-Average Access Delay:0.149456
+Average Access Delay:0.33401
 50000
 collide probility:0.0266299
 Drop rate:0.23%

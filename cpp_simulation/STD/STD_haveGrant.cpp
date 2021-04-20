@@ -1,9 +1,9 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-string directory_nMTCD ="100k";
-const int nMTCD=100000;
-const int simRAo = 6500; // 1=10ms
+string directory_nMTCD ="150K";
+const int nMTCD=150000;
+const int simRAo = 8600; // 1=10ms
 //const int interRAo = 5; // 10: index 3    5: index 6
 //const int cell_r = 1000;
 //const int d2d_r = 100;

@@ -1,0 +1,7 @@
+rao8589
+success146622 fail: 3378
+Complete Time:85.89s
+Average Access Delay:38.7594
+150000
+collide probility:0.267163
+Drop rate:2.252%

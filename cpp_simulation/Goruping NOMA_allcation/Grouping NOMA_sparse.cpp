@@ -526,7 +526,8 @@ int main()
 	{
 		if (MTCD_Table[i].RA_success_RAO != -1)//失敗率
 		{
-			totalMTCD_Access_delay += MTCD_Table[i].RA_success_RAO - MTCD_Table[i].RA_first_RAO;   // frist RA_RAO - Success RA_RAO
+			//totalMTCD_Access_delay += MTCD_Table[i].RA_success_RAO - MTCD_Table[i].RA_first_RAO;   // frist RA_RAO - Success RA_RAO
+            totalMTCD_Access_delay += MTCD_Table[i].RA_success_RAO - MTCD_Table[i].D2D_first_request_RAO;   // Success RA_RAO - D2D_first_request_RAO
 		}
 	}
 
