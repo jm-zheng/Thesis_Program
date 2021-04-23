@@ -1,7 +1,0 @@
-rao1927
-success98423 fail: 1577
-Complete Time:19.27s
-Average Access Delay:0.78356
-100000
-collide probility:0.0631186
-Drop rate:1.577%
