@@ -2,10 +2,10 @@
 
 using namespace std;
 
-string directory_nMTCD ="150K";
+string directory_nMTCD ="10K";
 const int nGroup =50; // group的數量
-const int nMTCD =150000;
-const int simRAo = 8600; // 1=10ms 20s
+const int nMTCD =10000;
+const int simRAo = 1500; // 1=10ms 20s
 const int Backoff_D2D = 40; //D2D backoff
 const int Backoff_RA = 20; //RA backoff
 const int D2D_cycle =8; //D2D_cycle 80ms =8 RAO
@@ -103,7 +103,7 @@ int main()
 {
 	srand(2021);
     fstream D2D_request_file ;
-    D2D_request_file.open("Sparse\\with_earlydection\\"+directory_nMTCD+"\\with_earlydection_D2D_request.csv", fstream::out);
+    D2D_request_file.open("Uniform\\"+directory_nMTCD+"\\with_earlydection_D2D_request.csv", fstream::out);
     for(int x=1; x<=nGroup; x++)
     {
         D2D_request_file <<x<<",";
@@ -622,7 +622,7 @@ int main()
 
     fstream nMTCD_file ;
 
-    nMTCD_file.open("Sparse\\with_earlydection\\"+directory_nMTCD+"\\with_earlydection_RAtime.csv", fstream::out);
+    nMTCD_file.open("Uniform\\"+directory_nMTCD+"\\with_earlydection_RAtime.csv", fstream::out);
     if (nMTCD_file.is_open())
 	{
         nMTCD_file <<"MTCD_number,group,D2D_first_request_RAO,D2D_initate_request_RAO,nRequest_D2D,";
@@ -640,7 +640,7 @@ int main()
 
 
     fstream PreStatus_file;
-    PreStatus_file.open("Sparse\\with_earlydection\\"+directory_nMTCD+"\\with_earlydection_PreStatus.csv", fstream::out);
+    PreStatus_file.open("Uniform\\"+directory_nMTCD+"\\with_earlydection_PreStatus.csv", fstream::out);
     if (PreStatus_file.is_open())
 	{
         PreStatus_file <<"initate MTCD,emtpyPre,collidePre,successPre,grant fail,collide probility,PACB"<<endl;
@@ -655,7 +655,7 @@ int main()
 
 
     fstream SuccessMTCD_cumulation_file;
-    SuccessMTCD_cumulation_file.open("Sparse\\with_earlydection\\"+directory_nMTCD+"\\with_earlydection_SuccessMTCD.csv", fstream::out);
+    SuccessMTCD_cumulation_file.open("Uniform\\"+directory_nMTCD+"\\with_earlydection_SuccessMTCD.csv", fstream::out);
     if (SuccessMTCD_cumulation_file.is_open())
 	{
         SuccessMTCD_cumulation_file <<"SuccessMTCD"<<endl;
@@ -674,7 +674,7 @@ int main()
 	cout << "Drop rate:" << (double(fail_nMTCD) / double(nMTCD)) * 100 << "%" << endl;
 
 	fstream result_file;
-	result_file.open("Sparse\\with_earlydection\\"+directory_nMTCD+"\\with_earlydection_result.txt",fstream :: out);
+	result_file.open("Uniform\\"+directory_nMTCD+"\\with_earlydection_result.txt",fstream :: out);
 
 	result_file <<"rao"<<finish_RAO<<endl;
     result_file <<"success"<< Success_nMTCD <<" fail: "<<fail_nMTCD << endl;

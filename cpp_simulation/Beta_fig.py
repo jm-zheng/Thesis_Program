@@ -3,29 +3,24 @@ import random
 import numpy as np
 import pandas as pd
 import os
-dircectory_nMTCD = "10K"
-Sim_RAO = 15+1  #1000 RAO = 10s  +1是因為圖表好看 15 36 40 65
+dircectory_nMTCD = "50K"
+MTCD_Position = "Dense"  # Sparse Dense
+Sim_RAO = 40+1  #1000 RAO = 10s  +1是因為圖表好看 15 36 40 65
 
-Axis_index = 0 # 0:10k 1:30K 2:50k 3:100K
+Axis_index = 2 # 0:10k 1:30K 2:50k 3:100K
 
-MTCD_CDF_Yaxis=[60,125,250,500]
-MTCD_CDF_Yaxis_gap=[5,10,25,50]
-MTCD_CDF_Xaxis_gap=[100,100,200,200]
+MTCD_init_Yaxis=[60,125,250,500,800]
+MTCD_init_Yaxis_gap=[5,10,25,50,100]
+MTCD_init_Xaxis_gap=[100,100,200,200,200]
 
-MTCD_init_Yaxis =[250,800,1500]
-MTCD_init_Yaxis_gap =[25,50,100]
+
 
 
 STD_Pre_status_withGrant = pd.read_csv("STD/Have_Grant/"+dircectory_nMTCD+"/STD_withGrant_stdsuccessdevice.csv")
-
-
-
 OptimalACB_Pre_status_NoSIB = pd.read_csv("optimalACB/No_SIB/"+dircectory_nMTCD+"/OptimalACB_PreStatus.csv")
-
-
 Preamble_allocation_Pre_staus = pd.read_csv("Premble_allocation/"+dircectory_nMTCD+"/PreambleAllocation_PreStatus.csv")
-
-Grouping_NOMA_allocation_Pre_status =pd.read_csv("Goruping NOMA_allcation/with_earlydection/"+dircectory_nMTCD+"/with_earlydection_PreStatus.csv")
+Grouping_NOMA_allocation_Pre_status =pd.read_csv("Goruping NOMA_allcation/"+MTCD_Position+"/"+dircectory_nMTCD+"/with_earlydection_PreStatus.csv")
+#Grouping_NOMA_allocation_Pre_status =pd.read_csv("Goruping NOMA_allcation/"+MTCD_Position+"/"+dircectory_nMTCD+"/Dense_with_earlydection_PreStatus.csv")
 
 print(Preamble_allocation_Pre_staus.head())
 
@@ -65,8 +60,8 @@ else:
 
 print(xlabe)
 
-plt.xticks(np.arange(0,(Sim_RAO*100),MTCD_CDF_Xaxis_gap[Axis_index]),labels=xlabe,fontsize=12)
-plt.yticks(np.arange(0,MTCD_CDF_Yaxis[Axis_index],MTCD_CDF_Yaxis_gap[Axis_index]),fontsize=12)
+plt.xticks(np.arange(0,(Sim_RAO*100),MTCD_init_Xaxis_gap[Axis_index]),labels=xlabe,fontsize=12)
+plt.yticks(np.arange(0,MTCD_init_Yaxis[Axis_index],MTCD_init_Yaxis_gap[Axis_index]),fontsize=12)
 
 #plt.grid(True, ls=':')
 

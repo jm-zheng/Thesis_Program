@@ -4,8 +4,9 @@ import numpy as np
 import pandas as pd
 import os
 dircectory_nMTCD = "100K"
-Sim_RAO = 65+1  #1000 RAO = 10s  +1是因為圖表好看 15 36 40 65
+MTCD_Position = "Sparse"
 
+Sim_RAO = 65+1  #1000 RAO = 10s  +1是因為圖表好看 15 36 40 65
 Axis_index = 3 # 0:10k 1:30K 2:50k 3:100K
 
 MTCD_CDF_Yaxis=[10000,30000,50000,100000]
@@ -22,9 +23,8 @@ STD_CDF_MTCD_withGrant = pd.read_csv("STD/Have_Grant/"+dircectory_nMTCD+"/STD_wi
 
 OptimalACB_Pre_status_NoSIB = pd.read_csv("optimalACB/No_SIB/"+dircectory_nMTCD+"/OptimalACB_PreStatus.csv")
 OptimalACB_CDF_MTCD_NoSIB = pd.read_csv("optimalACB/No_SIB/"+dircectory_nMTCD+"/OptimalACB_successdevice.csv")
-
 Preamble_allocation_CDF = pd.read_csv("Premble_allocation/"+dircectory_nMTCD+"/PreambleAllocation_SuccessMTCD.csv")
-Grouping_NOMA_allocation_CDF =pd.read_csv("Goruping NOMA_allcation/with_earlydection/"+dircectory_nMTCD+"/with_earlydection_SuccessMTCD.csv")
+Grouping_NOMA_allocation_CDF =pd.read_csv("Goruping NOMA_allcation/"+MTCD_Position+"/"+dircectory_nMTCD+"/with_earlydection_SuccessMTCD.csv")
 
 print(STD_CDF_MTCD_withGrant.head())
 
