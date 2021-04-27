@@ -92,7 +92,7 @@ int main()
 {
 	srand(2021);
     fstream D2D_request_file ;
-    D2D_request_file.open("Dense\\"+directory_nMTCD+"\\PreambleAllocation_D2D_request.csv", fstream::out);
+    D2D_request_file.open("Dense\\"+directory_nMTCD+"\\Dense_PreambleAllocation_D2D_request.csv", fstream::out);
     for(int x=1; x<=16; x++)
     {
         D2D_request_file <<x<<",";
@@ -307,7 +307,7 @@ int main()
                 {
                     if(MTCD_Table[i].RA_initate_RAO == Now_RAO && MTCD_Table[i].Preamble_number == each_RAO_Pre_index )
                     {
-                        MTCD_Table[i].nTransmit_RA +=1 ;
+                        MTCD_Table[i].nTransmit_RA +=1 ; //傳輸次數+1
 
                         if(each_RAO_Premble[each_RAO_Pre_index] > 1)
                         {
@@ -329,6 +329,7 @@ int main()
                             else
                             {
                                 fail_nMTCD +=1;
+                                MTCD_Table.at(i).nTransmit_RA +=1 ;//區隔成功跟失敗的設備重傳次數
                                 MTCD_Table[i].MTCD_RA_status = "Broken";
                             }
                         }
@@ -359,6 +360,7 @@ int main()
                                 else
                                 {
                                     fail_nMTCD +=1;
+                                    MTCD_Table.at(i).nTransmit_RA +=1 ;//區隔成功跟失敗的設備重傳次數
                                     MTCD_Table[i].MTCD_RA_status = "Broken";
                                 }
 
@@ -397,7 +399,7 @@ int main()
 
     fstream nMTCD_file ;
 
-    nMTCD_file.open("Dense\\"+directory_nMTCD+"\\PreambleAllocation_RAtime.csv", fstream::out);
+    nMTCD_file.open("Dense\\"+directory_nMTCD+"\\Dense_PreambleAllocation_RAtime.csv", fstream::out);
     if (nMTCD_file.is_open())
 	{
         nMTCD_file <<"MTCD_number,group,D2D_first_request_RAO,D2D_initate_request_RAO,nRequest_D2D,";
@@ -414,7 +416,7 @@ int main()
 
 
     fstream PreStatus_file;
-    PreStatus_file.open("Dense\\"+directory_nMTCD+"\\PreambleAllocation_PreStatus.csv", fstream::out);
+    PreStatus_file.open("Dense\\"+directory_nMTCD+"\\Dense_PreambleAllocation_PreStatus.csv", fstream::out);
     if (PreStatus_file.is_open())
 	{
         PreStatus_file <<"initate MTCD,emtpyPre,collidePre,successPre,grant fail,collide probility"<<endl;
@@ -429,7 +431,7 @@ int main()
 
 
     fstream SuccessMTCD_cumulation_file;
-    SuccessMTCD_cumulation_file.open("Dense\\"+directory_nMTCD+"\\PreambleAllocation_SuccessMTCD.csv", fstream::out);
+    SuccessMTCD_cumulation_file.open("Dense\\"+directory_nMTCD+"\\Dense_PreambleAllocation_SuccessMTCD.csv", fstream::out);
     if (SuccessMTCD_cumulation_file.is_open())
 	{
         SuccessMTCD_cumulation_file <<"SuccessMTCD"<<endl;
@@ -448,7 +450,7 @@ int main()
 	cout << "Drop rate:" << (double(fail_nMTCD) / double(nMTCD)) * 100 << "%" << endl;
 
 	fstream result_file;
-	result_file.open("Dense\\"+directory_nMTCD+"\\PreambleAllocation_result.txt",fstream :: out);
+	result_file.open("Dense\\"+directory_nMTCD+"\\Dense_PreambleAllocation_result.txt",fstream :: out);
 
 	result_file <<"rao"<<finish_RAO<<endl;
     result_file <<"success"<< Success_nMTCD <<" fail: "<<fail_nMTCD << endl;

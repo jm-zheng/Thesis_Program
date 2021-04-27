@@ -3,11 +3,11 @@ import random
 import numpy as np
 import pandas as pd
 import os
-dircectory_nMTCD = "150K"
-MTCD_Position = "Sparse"
+dircectory_nMTCD = "10K"
+fig_nMTCD = "10k"
 
-Sim_RAO = 86+1  #1000 RAO = 10s  +1是因為圖表好看 15 36 40 65
-Axis_index = 4 # 0:10k 1:30K 2:50k 3:100K
+Sim_RAO = 15+1  #1000 RAO = 10s  +1是因為圖表好看 15 36 40 65 86
+Axis_index = 0 # 0:10k 1:30K 2:50k 3:100K
 
 MTCD_CDF_Yaxis=[10000,30000,50000,100000,150000]
 MTCD_CDF_Yaxis_gap=[1000,2500,5000,10000,10000]
@@ -15,16 +15,12 @@ MTCD_CDF_Xaxis_gap=[100,100,200,200,200]
 
 
 
-STD_Pre_status_withGrant = pd.read_csv("STD/Have_Grant/"+dircectory_nMTCD+"/STD_withGrant_PreStatus.csv")
-STD_CDF_MTCD_withGrant = pd.read_csv("STD/Have_Grant/"+dircectory_nMTCD+"/STD_withGrant_stdsuccessdevice.csv")
 
-
-OptimalACB_Pre_status_NoSIB = pd.read_csv("optimalACB/No_SIB/"+dircectory_nMTCD+"/OptimalACB_PreStatus.csv")
-OptimalACB_CDF_MTCD_NoSIB = pd.read_csv("optimalACB/No_SIB/"+dircectory_nMTCD+"/OptimalACB_successdevice.csv")
-Preamble_allocation_CDF = pd.read_csv("Premble_allocation/"+dircectory_nMTCD+"/PreambleAllocation_SuccessMTCD.csv")
-Grouping_NOMA_allocationSparse_CDF =pd.read_csv("Goruping NOMA_allcation/"+MTCD_Position+"/"+dircectory_nMTCD+"/with_earlydection_SuccessMTCD.csv")
+Preamble_allocationUniform_CDF = pd.read_csv("Premble_allocation/Uniform/"+dircectory_nMTCD+"/PreambleAllocation_SuccessMTCD.csv")
+Preamble_allocationDense_CDF = pd.read_csv("Premble_allocation/Dense/"+dircectory_nMTCD+"/Dense_PreambleAllocation_SuccessMTCD.csv")
+Grouping_NOMA_allocationUniform_CDF =pd.read_csv("Goruping NOMA_allcation/Uniform/"+dircectory_nMTCD+"/with_earlydection_SuccessMTCD.csv")
 Grouping_NOMA_allocationDense_CDF =pd.read_csv("Goruping NOMA_allcation/Dense/"+dircectory_nMTCD+"/Dense_with_earlydection_SuccessMTCD.csv")
-print(STD_CDF_MTCD_withGrant.head())
+
 
 
 
@@ -34,12 +30,13 @@ print(STD_CDF_MTCD_withGrant.head())
 # Cumulative MTCD
 
 
-#plt.plot(STD_CDF_MTCD_withGrant['success'],label='STD - with Grant',markevery=100,marker='^')
-#plt.plot(OptimalACB_CDF_MTCD_NoSIB['success'],label='Optimal ACB ',marker='s',markevery=100)
-plt.plot(Grouping_NOMA_allocationDense_CDF['SuccessMTCD'],label='Proposal-Grouping NOMA(Dense)',markevery=100,marker='x')
-plt.plot(Grouping_NOMA_allocationSparse_CDF['SuccessMTCD'],label='Proposal-Grouping NOMA(Sparse)',markevery=100,marker='*')
 
-plt.legend(loc=7,fontsize=16)
+plt.plot(Grouping_NOMA_allocationDense_CDF['SuccessMTCD'],label='Proposal-Grouping NOMA(Dense)',markevery=100,marker='x')
+plt.plot(Grouping_NOMA_allocationUniform_CDF['SuccessMTCD'],label='Proposal-Grouping NOMA(Sparse)',markevery=100,marker='*')
+plt.plot(Preamble_allocationDense_CDF['SuccessMTCD'],label='Preamble Allocation(Dense) ',marker='s',markevery=100)
+plt.plot(Preamble_allocationUniform_CDF['SuccessMTCD'],label='Preamble Allocation(Sparse)',markevery=100,marker='^')
+
+plt.legend(loc='lower right',fontsize=16)
 plt.ylim(bottom=0)
 plt.xlim(left=0)
 xlabe=[]
@@ -59,8 +56,8 @@ plt.yticks(np.arange(0,MTCD_CDF_Yaxis[Axis_index]+1000,MTCD_CDF_Yaxis_gap[Axis_i
 
 #plt.grid(True, ls=':')
 
-plt.title('Cumulative Success MTCDs with nMTCD = '+dircectory_nMTCD,fontsize=22)
-plt.ylabel('Number of Successful MTCDs ',fontsize=22)
+plt.title('Cumulative success MTCDs between dense and uniform distribution.  \n( nMTCD='+fig_nMTCD+", r=10 )",fontsize=26)
+plt.ylabel('Cumulative number of successful MTCDs ',fontsize=22)
 plt.xlabel('Simulation Time(second)',fontsize=22)
 plt.grid()
 

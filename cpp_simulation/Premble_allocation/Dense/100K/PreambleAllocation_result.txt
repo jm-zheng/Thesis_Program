@@ -1,7 +1,0 @@
-rao5162
-success70776 fail: 29224
-Complete Time:51.62s
-Average Access Delay:9.81847
-100000
-collide probility:0.0623072
-Drop rate:29.224%

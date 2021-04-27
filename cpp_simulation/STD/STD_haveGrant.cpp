@@ -1,9 +1,9 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-string directory_nMTCD ="150K";
-const int nMTCD=150000;
-const int simRAo = 8600; // 1=10ms
+string directory_nMTCD ="10K";
+const int nMTCD=10000;
+const int simRAo = 1500; // 1=10ms
 //const int interRAo = 5; // 10: index 3    5: index 6
 //const int cell_r = 1000;
 //const int d2d_r = 100;
@@ -143,13 +143,16 @@ int main()
 			}
 			else if (eachRAoPre[c] > 1) {
 				++PreStatus[2][a];
-				for (int d = 0; d < nMTCD; ++d)
+				for (int d = 0; d < nMTCD; ++d){
 					if (c == SelectPre[d]){
-						++RAtime[3][d];
-						if (RAtime[3][d] < maxreTimes) RAtime[0][d] = RAtime[0][d] + (Backoff / 10);
-						else ++numMTCDfail;
-
+						++RAtime[3][d]; //¶Ç¿é¦¸¼Æ+1
+						if (RAtime[3][d] < maxreTimes) {RAtime[0][d] = RAtime[0][d] + (Backoff / 10);}
+						else{
+							 ++RAtime[3][d];//°Ï¹j¦¨¥\¸ò¥¢±Ñªº³]³Æ­«¶Ç¦¸¼Æ
+							 ++numMTCDfail;
+						}
 					}
+				}
 			}
 			else if (eachRAoPre[c] == 1) {   // ¸Ó­Ópreamble¥u¦³1­Ó³]³Æµoþ
 				bool grant_check_index =0;
@@ -162,9 +165,11 @@ int main()
 						++SuccessnMTCD;
 						SuccessnMTCDslot[a]++;
 						for (int d = 0; d < nMTCD; ++d) {
-							if (SelectPre[d] == c)  //²Ä´X­ÓMTCD
+							if (SelectPre[d] == c){  //²Ä´X­ÓMTCD
+								++RAtime[3][d]; //¶Ç¿é¦¸¼Æ+1
 								RAtime[2][d] = a +5;//5¬° RAR windows size + Contention resolution timer
 							}
+						}
 					}
 				}
 				if(grant_check_index == 0)  // ¨S¦³¤À°t¨ìgrant
@@ -173,9 +178,12 @@ int main()
 					for (int d = 0; d < nMTCD; ++d)
 						if (c == SelectPre[d])
 						{
-							++RAtime[3][d];
+							++RAtime[3][d]; //¶Ç¿é¦¸¼Æ+1
 							if (RAtime[3][d] < maxreTimes) RAtime[0][d] = RAtime[0][d] + (Backoff / 10);
-							else ++numMTCDfail;
+							else {
+								++RAtime[3][d];//°Ï¹j¦¨¥\¸ò¥¢±Ñªº³]³Æ­«¶Ç¦¸¼Æ
+								++numMTCDfail;
+							}
 						}
 				}
 			}

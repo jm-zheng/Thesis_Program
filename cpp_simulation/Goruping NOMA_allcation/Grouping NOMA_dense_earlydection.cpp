@@ -461,6 +461,7 @@ int main()
                             else
                             {
                                 fail_nMTCD +=1;
+                                MTCD_Table.at(i).nTransmit_RA +=1 ;//區隔成功跟失敗的設備重傳次數
                                 MTCD_Table[i].MTCD_RA_status = "Broken";
                             }
                         }
@@ -496,6 +497,7 @@ int main()
                                 else
                                 {
                                     fail_nMTCD +=1;
+                                    MTCD_Table.at(i).nTransmit_RA +=1 ;//區隔成功跟失敗的設備重傳次數
                                     MTCD_Table[i].MTCD_RA_status = "Broken";
                                 }
 
@@ -532,6 +534,7 @@ int main()
                                 else
                                 {
                                     fail_nMTCD +=1;
+                                    MTCD_Table.at(i).nTransmit_RA +=1 ;//區隔成功跟失敗的設備重傳次數
                                     MTCD_Table[i].MTCD_RA_status = "Broken";
                                 }
 

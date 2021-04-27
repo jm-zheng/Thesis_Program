@@ -4,9 +4,9 @@
 #include <ctime>
 using namespace std;
 
-string directory_nMTCD ="30K";
-const int nMTCD=30000;
-const int simRAo = 3600; // 1=10ms
+string directory_nMTCD ="150K";
+const int nMTCD=150000;
+const int simRAo = 8600; // 1=10ms
 //const int interRAo = 5; // 10: index 3    5: index 6
 //const int cell_r = 1000;
 //const int d2d_r = 100;
@@ -143,15 +143,19 @@ int main()
 			}
 			else if (eachRAoPre[c] > 1) {
 				++PreStatus[2][a];
-				for (int d = 0; d < nMTCD; ++d)
+				for (int d = 0; d < nMTCD; ++d){
 					if (c == SelectPre[d])
 					{
-						++RAtime[3][d];
+						++RAtime[3][d]; //傳輸次數+1
 						if (RAtime[3][d] < maxreTimes) {
 								RAtime[0][d] = RAtime[0][d] + (Backoff / 10);
-							}
-							else ++numMTCDfail;
 						}
+						else{
+							++RAtime[3][d]; //區隔成功跟失敗的設備重傳次數
+							++numMTCDfail;
+						}
+					}
+				}
 			}
 			else if (eachRAoPre[c] == 1) {   // 該個preamble只有1個設備發??
 				bool grant_check_index =0;
@@ -164,9 +168,11 @@ int main()
 						++SuccessnMTCD;
 						SuccessnMTCDslot[a]++;
 						for (int d = 0; d < nMTCD; ++d) {
-							if (SelectPre[d] == c)  //第幾個MTCD
+							if (SelectPre[d] == c){  //第幾個MTCD
+								++RAtime[3][d]; //傳輸次數+1
 								RAtime[2][d] = a +5;//5為 RAR windows size + Contention resolution timer
 							}
+						}
 					}
 				}
 				if(grant_check_index == 0)  // 沒有分配到grant
@@ -175,11 +181,14 @@ int main()
 					for (int d = 0; d < nMTCD; ++d)
 						if (c == SelectPre[d])
 						{
-							++RAtime[3][d];
+							++RAtime[3][d];//傳輸次數+1
 							if (RAtime[3][d] < maxreTimes) {
-									RAtime[0][d] = RAtime[0][d] + (Backoff / 10);
+								RAtime[0][d] = RAtime[0][d] + (Backoff / 10);
 							}
-								else ++numMTCDfail;
+							else{
+								++RAtime[3][d];//區隔成功跟失敗的設備重傳次數
+								++numMTCDfail;
+							}
 						}
 
 				}

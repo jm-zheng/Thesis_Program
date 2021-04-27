@@ -2,10 +2,10 @@
 
 using namespace std;
 
-string directory_nMTCD ="10K";
+string directory_nMTCD ="150K";
 const int nGroup =50; // group的數量
-const int nMTCD =10000;
-const int simRAo = 1500; // 1=10ms 20s
+const int nMTCD =150000;
+const int simRAo = 8600; // 1=10ms 20s
 const int Backoff_D2D = 40; //D2D backoff
 const int Backoff_RA = 20; //RA backoff
 const int D2D_cycle =8; //D2D_cycle 80ms =8 RAO
@@ -492,7 +492,7 @@ int main()
                 {
                     if(MTCD_Table.at(i).RA_initate_RAO == Now_RAO && MTCD_Table.at(i).Preamble_number == each_RAO_Pre_index )
                     {
-                        MTCD_Table.at(i).nTransmit_RA +=1 ;
+                        MTCD_Table.at(i).nTransmit_RA +=1 ;  //傳輸次數+1
 
                         if(each_RAO_Premble[each_RAO_Pre_index] > 1 && MTCD_Table.at(i).Preamble_number> nGroup)  //如果share preamble發生碰撞 就 backoff
                         {
@@ -512,6 +512,7 @@ int main()
                             else
                             {
                                 fail_nMTCD +=1;
+                                MTCD_Table.at(i).nTransmit_RA +=1 ;//區隔成功跟失敗的設備重傳次數
                                 MTCD_Table.at(i).MTCD_RA_status = "Broken";
                             }
                         }
@@ -538,7 +539,7 @@ int main()
 
                             if(grant_check_index == 0)
                             {
-                                 if(MTCD_Table[i].Power_level == 0){PreStatus[4][Now_RAO]+=1;} //Grant fail +=1
+                                if(MTCD_Table[i].Power_level == 0){PreStatus[4][Now_RAO]+=1;} //Grant fail +=1
 
                                 if(MTCD_Table.at(i).nTransmit_RA < MAX_nTransmit_RA)
                                 {
@@ -548,6 +549,7 @@ int main()
                                 else
                                 {
                                     fail_nMTCD +=1;
+                                    MTCD_Table.at(i).nTransmit_RA +=1 ;//區隔成功跟失敗的設備重傳次數
                                     MTCD_Table.at(i).MTCD_RA_status = "Broken";
                                 }
 
@@ -583,6 +585,7 @@ int main()
                                 else
                                 {
                                     fail_nMTCD +=1;
+                                    MTCD_Table.at(i).nTransmit_RA +=1 ;//區隔成功跟失敗的設備重傳次數
                                     MTCD_Table.at(i).MTCD_RA_status = "Broken";
                                 }
 

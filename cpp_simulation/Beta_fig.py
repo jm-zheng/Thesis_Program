@@ -5,26 +5,23 @@ import pandas as pd
 import os
 dircectory_nMTCD = "50K"
 MTCD_Position = "Dense"  # Sparse Dense
-Sim_RAO = 40+1  #1000 RAO = 10s  +1是因為圖表好看 15 36 40 65
+Sim_RAO = 10+1  #1000 RAO = 10s  +1是因為圖表好看 15 36 40 65
 
-Axis_index = 2 # 0:10k 1:30K 2:50k 3:100K
+Axis_index = 0 # 0:10k 1:30K 2:50k 3:100K
 
-MTCD_init_Yaxis=[60,125,250,500,800]
-MTCD_init_Yaxis_gap=[5,10,25,50,100]
-MTCD_init_Xaxis_gap=[100,100,200,200,200]
-
-
+MTCD_init_Yaxis=[400]
+MTCD_init_Yaxis_gap=[25]
+MTCD_init_Xaxis_gap=[100]
 
 
-STD_Pre_status_withGrant = pd.read_csv("STD/Have_Grant/"+dircectory_nMTCD+"/STD_withGrant_stdsuccessdevice.csv")
-OptimalACB_Pre_status_NoSIB = pd.read_csv("optimalACB/No_SIB/"+dircectory_nMTCD+"/OptimalACB_PreStatus.csv")
-Preamble_allocation_Pre_staus = pd.read_csv("Premble_allocation/"+dircectory_nMTCD+"/PreambleAllocation_PreStatus.csv")
-Grouping_NOMA_allocation_Pre_status =pd.read_csv("Goruping NOMA_allcation/"+MTCD_Position+"/"+dircectory_nMTCD+"/with_earlydection_PreStatus.csv")
-#Grouping_NOMA_allocation_Pre_status =pd.read_csv("Goruping NOMA_allcation/"+MTCD_Position+"/"+dircectory_nMTCD+"/Dense_with_earlydection_PreStatus.csv")
 
-print(Preamble_allocation_Pre_staus.head())
 
-print(Grouping_NOMA_allocation_Pre_status.head())
+Beta_10k = pd.read_csv("NORA/Have_Grant/10K/MTCD_beta_distribution.csv")
+Beta_30k = pd.read_csv("NORA/Have_Grant/30K/MTCD_beta_distribution.csv")
+Beta_50k = pd.read_csv("NORA/Have_Grant/50K/MTCD_beta_distribution.csv")
+Beta_100k = pd.read_csv("NORA/Have_Grant/100K/MTCD_beta_distribution.csv")
+Beta_150k = pd.read_csv("NORA/Have_Grant/150K/MTCD_beta_distribution.csv")
+
 
 
 
@@ -32,12 +29,14 @@ print(Grouping_NOMA_allocation_Pre_status.head())
 
 # Cumulative MTCD
 
+plt.plot(Beta_150k['beta_nMTCD'],label='150k MTCDs')
+plt.plot(Beta_100k['beta_nMTCD'],label='100k MTCDs')
+plt.plot(Beta_50k['beta_nMTCD'],label='50k MTCDs')
+plt.plot(Beta_30k['beta_nMTCD'],label='30k MTCDs')
+plt.plot(Beta_10k['beta_nMTCD'],label='10k MTCDs')
 
-plt.plot(Preamble_allocation_Pre_staus['initate MTCD'],label='Preamble Allocation')
-plt.plot(Grouping_NOMA_allocation_Pre_status['initate MTCD'],label='Proposal-Grouping NOMA')
-plt.plot(OptimalACB_Pre_status_NoSIB['initate MTCD'],label='Optimal ACB')
 
-plt.plot(STD_Pre_status_withGrant['beta_nMTCD'],label='Beta (3,4)')
+
 
 #plt.plot(Grouping_NOMA_allocation_Pre_status['D2D_first_request_RAO'],label='STD - with Grant',markevery=100,marker='^')
 '''
@@ -64,10 +63,10 @@ plt.xticks(np.arange(0,(Sim_RAO*100),MTCD_init_Xaxis_gap[Axis_index]),labels=xla
 plt.yticks(np.arange(0,MTCD_init_Yaxis[Axis_index],MTCD_init_Yaxis_gap[Axis_index]),fontsize=12)
 
 #plt.grid(True, ls=':')
-
-plt.title('MTCDs RA Distribution = '+dircectory_nMTCD,fontsize=18)
-plt.ylabel('Number of MTCDs initiated RA  ',fontsize=16)
-plt.xlabel('Simulation Time(second)',fontsize=16)
+plt.legend(fontsize=16)
+plt.title('Distribution of MTCDs initiated RA.  Beta( 3,4,10s )    ',fontsize=18)
+plt.ylabel('Number of MTCDs initiated RA.  ',fontsize=16)
+plt.xlabel('Simulation Time(second).',fontsize=16)
 plt.grid()
 
 plt.show()

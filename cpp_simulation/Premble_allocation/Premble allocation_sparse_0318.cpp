@@ -1,9 +1,9 @@
 ﻿#include<bits/stdc++.h>
 using namespace std;
 
-string directory_nMTCD ="100K";
-const int nMTCD = 100000;
-const int simRAo = 6500; // 1=10ms 20s
+string directory_nMTCD ="150K";
+const int nMTCD = 150000;
+const int simRAo = 8600; // 1=10ms 20s
 const int Backoff_D2D = 40; //D2D backoff
 const int Backoff_RA = 20; //RA backoff
 const int D2D_cycle =8; //D2D_cycle 80ms =8 RAO
@@ -319,8 +319,6 @@ int main()
                             }
                             //cout <<Now_RAO <<"collision_Share_Preamble:"<<collision_Share_Preamble.size()<<endl;
 
-
-
                             if(MTCD_Table[i].nTransmit_RA<10)
                             {
                                 MTCD_Table[i].D2D_initate_request_RAO = Now_RAO +(Backoff_RA / 10);
@@ -329,6 +327,7 @@ int main()
                             else
                             {
                                 fail_nMTCD +=1;
+                                MTCD_Table.at(i).nTransmit_RA +=1 ;//區隔成功跟失敗的設備重傳次數
                                 MTCD_Table[i].MTCD_RA_status = "Broken";
                             }
                         }
@@ -359,6 +358,7 @@ int main()
                                 else
                                 {
                                     fail_nMTCD +=1;
+                                    MTCD_Table.at(i).nTransmit_RA +=1 ;//區隔成功跟失敗的設備重傳次數
                                     MTCD_Table[i].MTCD_RA_status = "Broken";
                                 }
 

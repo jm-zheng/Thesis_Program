@@ -1,7 +1,0 @@
-rao3222
-success29880 fail: 120
-Complete Time:32.22s
-Average Access Delay:3.05523
-30000
-collide probility:0.0395889
-Drop rate:0.4%
