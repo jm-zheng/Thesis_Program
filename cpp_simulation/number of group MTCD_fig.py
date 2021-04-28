@@ -2,9 +2,9 @@ import matplotlib.pyplot as plt
 import random
 import numpy as np
 import pandas as pd
-dircectory_nMTCD = "30K"
+dircectory_nMTCD = "50K"
 MTCD_Position = "Dense"
-Axis_index = 7 # 0:10k 1:30K 2:50k 3:100K
+Axis_index = 2 # 0:10k 1:30K 2:50k 3:100K
 
 nMTCD_group_Yaxis=[300,700,1100,2300,3500,450,1200,2000]  # 前5個sparse 後5個dense
 nMTCD_group_Yaxis_gap=[50,100,100,500,500,50,100,200]  # 前5個sparse 後5個dense
@@ -12,6 +12,7 @@ nMTCD_group_Yaxis_gap=[50,100,100,500,500,50,100,200]  # 前5個sparse 後5個de
 
 #Grouping_NOMA_allocation_RAtime = pd.read_csv("Goruping NOMA_allcation/Sparse/"+dircectory_nMTCD+"/with_earlydection_RAtime.csv")
 Grouping_NOMA_allocation_RAtime =pd.read_csv("Goruping NOMA_allcation/Dense/"+dircectory_nMTCD+"/Dense_with_earlydection_RAtime.csv")
+#Grouping_NOMA_allocation_RAtime =pd.read_csv("Premble_allocation/Dense/"+dircectory_nMTCD+"/Dense_PreambleAllocation_RAtime.csv")
 
 nMTCD_group = Grouping_NOMA_allocation_RAtime["group"].value_counts().sort_index().plot.bar()
 

@@ -407,7 +407,7 @@ int main()
         {
             nMTCD_file <<MTCD_Table[i].MTCD_number<<","<<MTCD_Table[i].group<<","<<MTCD_Table[i].D2D_first_request_RAO<<","<<MTCD_Table[i].D2D_initate_request_RAO<<",";
             nMTCD_file <<MTCD_Table[i].nRequest_D2D<<","<<MTCD_Table[i].RA_first_RAO<<","<<MTCD_Table[i].RA_initate_RAO<<","<<MTCD_Table[i].RA_success_RAO<<",";
-            nMTCD_file <<MTCD_Table[i].nTransmit_RA<<","<<MTCD_Table[i].Preamble_number<<","<<MTCD_Table[i].MTCD_RA_status<<","<<endl;
+            nMTCD_file <<MTCD_Table[i].nTransmit_RA<<","<<MTCD_Table[i].Preamble_number<<","<<MTCD_Table[i].MTCD_RA_status<<endl;
         }
     }
 
