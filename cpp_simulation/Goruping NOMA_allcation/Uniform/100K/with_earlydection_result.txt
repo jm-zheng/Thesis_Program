@@ -1,7 +1,7 @@
 rao1839
 success98982 fail: 1018
 Complete Time:18.39s
-Average Access Delay:2.85763
+Average Access Delay:2.82363
 100000
 collide probility:0.0615874
 Drop rate:1.018%

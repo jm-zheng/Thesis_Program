@@ -3,11 +3,11 @@ import random
 import numpy as np
 import pandas as pd
 import os
-dircectory_nMTCD = "10K"
-fig_nMTCD = "10k"
+dircectory_nMTCD = "100K"
+fig_nMTCD = "100k"
 
-Sim_RAO = 15+1  #1000 RAO = 10s  +1是因為圖表好看 15 36 40 65 86
-Axis_index = 0 # 0:10k 1:30K 2:50k 3:100K
+Sim_RAO = 65+1  #1000 RAO = 10s  +1是因為圖表好看 15 36 40 65 86
+Axis_index = 3 # 0:10k 1:30K 2:50k 3:100K
 
 MTCD_CDF_Yaxis=[10000,30000,50000,100000,150000]
 MTCD_CDF_Yaxis_gap=[1000,2500,5000,10000,10000]

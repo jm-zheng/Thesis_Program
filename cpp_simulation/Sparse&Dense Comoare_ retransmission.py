@@ -2,14 +2,13 @@ import matplotlib.pyplot as plt
 import random
 import numpy as np
 import pandas as pd
-dircectory_nMTCD = "50K"
-MTCD_Position = "Dense"
-Axis_index = 0 # 0:10k 1:30K 2:50k 3:100K
+dircectory_nMTCD = "150K"
+Axis_index = 2 # 0:50k 1:100K 2:150K
 bar_width = 0.15  # 有四項數據
 bar_width_align=bar_width/2
 
-Group_nTransmit_Yaxis=[10000,30000,35000,100000,1500000]  # 前5個sparse 後5個dense
-Group_nTransmit_Yaxis_gap=[1000,3000,5000,10000,15000]  # 前5個sparse 後5個dense
+Group_nTransmit_Yaxis=[10000,16000,35000,8000]  # 從50k開始
+Group_nTransmit_Yaxis_gap=[1000,2000,5000,1000]  #
 
 
 Uniform_Grouping_NOMA_allocation_RAtime = pd.read_csv("Goruping NOMA_allcation/Uniform/"+dircectory_nMTCD+"/with_earlydection_RAtime.csv", index_col=False)
@@ -18,9 +17,12 @@ Dense_Grouping_NOMA_allocation_RAtime = pd.read_csv("Goruping NOMA_allcation/Den
 Dense_Preamble_allocationDense_RAtime = pd.read_csv("Premble_allocation/Dense/"+dircectory_nMTCD+"/Dense_PreambleAllocation_RAtime.csv", index_col=False)
 
 
-
+#aaa = Dense_Preamble_allocationDense_RAtime[Dense_Preamble_allocationDense_RAtime["group"].between(4,16)]
+#bbb = Uniform_Preamble_allocation_RAtime[Uniform_Preamble_allocation_RAtime["group"].between(4,16)]
 Dense_Preamble_allocationDense_RAtime =Dense_Preamble_allocationDense_RAtime[Dense_Preamble_allocationDense_RAtime["group"].between(1,3)]
 Uniform_Preamble_allocation_RAtime =Uniform_Preamble_allocation_RAtime[Uniform_Preamble_allocation_RAtime["group"].between(1,3)]
+
+
 
 mask1 = (Uniform_Grouping_NOMA_allocation_RAtime["group"] <=3)
 mask2 = (Uniform_Grouping_NOMA_allocation_RAtime["group"] >=26) & (Uniform_Grouping_NOMA_allocation_RAtime["group"] <=29)
@@ -35,15 +37,15 @@ Dense_Grouping_NOMA_nTransmit_RA = Dense_Grouping_NOMA_allocation_RAtime["nTrans
 Uniform_Grouping_NOMA_nTransmit_RA = Uniform_Grouping_NOMA_allocation_RAtime["nTransmit_RA"].value_counts().sort_index()
 Dense_Preamble_allocationDense_nTransmit_RA = Dense_Preamble_allocationDense_RAtime["nTransmit_RA"].value_counts().sort_index()
 Uniform_Preamble_allocation_nTransmit_RA = Uniform_Preamble_allocation_RAtime["nTransmit_RA"].value_counts().sort_index()
-
-
+#aaa=aaa["nTransmit_RA"].value_counts().sort_index()
+#bbb=bbb["nTransmit_RA"].value_counts().sort_index()
 
 
 print(Uniform_Grouping_NOMA_allocation_RAtime["nTransmit_RA"].value_counts().sort_index())
 print(Dense_Grouping_NOMA_allocation_RAtime["nTransmit_RA"].value_counts().sort_index())
 
-print(Uniform_Preamble_allocation_RAtime["nTransmit_RA"].value_counts().sort_index())
-print(Dense_Preamble_allocationDense_RAtime["nTransmit_RA"].value_counts().sort_index())
+print(Uniform_Preamble_allocation_nTransmit_RA)
+print(Dense_Preamble_allocationDense_nTransmit_RA)
 
 
 plt.bar(np.arange(1,12)-(bar_width*2-bar_width_align), Uniform_Grouping_NOMA_nTransmit_RA,width=bar_width,color="yellow",label="Grouping NOMA(Uniform)")
@@ -51,15 +53,15 @@ plt.bar(np.arange(1,12)-(bar_width*1-bar_width_align), Dense_Grouping_NOMA_nTran
 plt.bar(np.arange(1,12)+(bar_width*1-bar_width_align), Uniform_Preamble_allocation_nTransmit_RA,width=bar_width,color="r",label="Preamble allocationDense(Uniform)")
 plt.bar(np.arange(1,12)+(bar_width*2-bar_width_align), Dense_Preamble_allocationDense_nTransmit_RA,width=bar_width,color="tomato",label="Preamble allocationDense(Dense)")
 
-plt.legend(loc='upper left',fontsize=16)
+plt.legend(loc='upper center',fontsize=16)
 plt.ylim(bottom=0)
 plt.xlim(left=0.5)
-plt.title('Distribution of MTCDs Position for '+MTCD_Position+' ( nMTCDs = '+ dircectory_nMTCD+" )",fontsize=26)
+plt.title('The Influence of Different Position Distributions on the Number of Retransmissions \n ( nMTCD='+ dircectory_nMTCD+", r=10) ",fontsize=26)
 
 plt.xticks(np.arange(1,12))
 plt.yticks(np.arange(0,Group_nTransmit_Yaxis[Axis_index],Group_nTransmit_Yaxis_gap[Axis_index]),fontsize=16)
 plt.ylabel('Number of MTCDs ',fontsize=20)
-plt.xlabel('i-th Group',fontsize=20)
+plt.xlabel('Number of MTCDs Retransmission',fontsize=20)
 
 
 plt.show()

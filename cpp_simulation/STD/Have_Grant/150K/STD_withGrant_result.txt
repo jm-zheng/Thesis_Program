@@ -1,7 +1,7 @@
 rao962
 success1233 fail: 148767
 Complete Time:9.62s
-Average Access Delay:0.086837
+Average Access Delay:0.052837
 150000
 collide probility:0.854508
 Drop rate:99.178%

@@ -1,7 +1,7 @@
 rao954
 success6908 fail: 3092
 Complete Time:9.54s
-Average Access Delay:0.0749653
+Average Access Delay:0.0409653
 10000
 collide probility:0.221096
 Drop rate:30.92%

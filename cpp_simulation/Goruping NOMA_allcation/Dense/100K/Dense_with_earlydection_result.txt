@@ -1,7 +1,7 @@
 rao1867
 success99129 fail: 871
 Complete Time:18.67s
-Average Access Delay:2.94165
+Average Access Delay:2.90765
 100000
 collide probility:0.0624789
 Drop rate:0.871%

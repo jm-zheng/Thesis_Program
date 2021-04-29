@@ -1,7 +1,7 @@
 rao3572
 success29824 fail: 176
 Complete Time:35.72s
-Average Access Delay:2.96019
+Average Access Delay:2.92619
 30000
 collide probility:0.0349581
 Drop rate:0.586667%

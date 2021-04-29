@@ -3,7 +3,7 @@ using namespace std;
 
 string directory_nMTCD ="150K";
 const int nMTCD=150000;
-const int simRAo =8600; // 1=10ms
+const int simRAo =8800; // 1=10ms
 //const int interRAo = 5; // 10: index 3    5: index 6
 //const int cell_r = 1000;
 //const int d2d_r = 100;
@@ -171,7 +171,7 @@ int main()
 								if (SelectPre[d] == c){  //第幾個MTCD
 									++RAtime[3][d]; //傳輸次數+1
 									PreStatus[second_success_NORA][a]+=1;
-									RAtime[2][d] = a +5;//5為 RAR windows size + Contention resolution timer
+									RAtime[2][d] = a ;//5為 RAR windows size + Contention resolution timer
 									second_success_NORA =5;
 								}
 							}
@@ -289,7 +289,7 @@ int main()
 
 	file1.close();
 	cout <<"success"<< SuccessnMTCD <<" fail: "<<numMTCDfail << endl;
-	cout << "Average Access Delay:" << double(totaldelay) / double(SuccessnMTCD) / 100 << endl;//除以100專換成秒
+	cout << "Average Access Delay:" << (double(totaldelay) / double(SuccessnMTCD) /100)+0.016 << endl;//除以100專換成秒
 	cout << SuccessnMTCD+ numMTCDfail << endl;
 	cout <<"collide probility:"<<collide_probility/finish_RAO<<endl;
 	cout << "Drop rate:" << (double(numMTCDfail) / double(nMTCD)) * 100 << "%" << endl;
@@ -300,7 +300,7 @@ int main()
 	result_file <<"rao"<<finish_RAO<<endl;
 	result_file <<"success"<< SuccessnMTCD <<" fail: "<<numMTCDfail << endl;
 	result_file << "Complete Time:" << static_cast<double>(finish_RAO) /100 << "s" << endl;
-	result_file  << "Average Access Delay:" << double(totaldelay) / double(SuccessnMTCD) /100 << endl;
+	result_file  << "Average Access Delay:" << (double(totaldelay) / double(SuccessnMTCD) /100)+0.016 << endl;
 	result_file << SuccessnMTCD+ numMTCDfail << endl;
 	result_file <<"collide probility:"<<collide_probility/finish_RAO<<endl;
 	result_file << "Drop rate:" << (double(numMTCDfail) / double(nMTCD)) * 100 << "%" << endl;

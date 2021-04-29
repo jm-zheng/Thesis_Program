@@ -5,7 +5,7 @@ using namespace std;
 string directory_nMTCD ="150K";
 const int nGroup =50; // group的數量
 const int nMTCD =150000;
-const int simRAo = 8600; // 1=10ms 20s
+const int simRAo = 8800; // 1=10ms 20s
 const int Backoff_D2D = 40; //D2D backoff
 const int Backoff_RA = 20; //RA backoff
 const int D2D_cycle =8; //D2D_cycle 80ms =8 RAO
@@ -171,7 +171,7 @@ int main()
 	for( int Now_RAO=0; Now_RAO<simRAo; Now_RAO++)
 	{
 
-		if(Now_RAO % D2D_cycle ==0 )
+		if(Now_RAO % SIB2_cycle ==0 )
         {
             PACB_SharePremble =0;
 
@@ -191,10 +191,10 @@ int main()
             PACB_SharePremble = PACB_SharePremble /SIB2_cycle;
             PACB_SharePremble =PACB_SharePremble / D2D_cycle;  //算出PACB後再除於D2D_cycle，讓設備可以平均一點發起
 
-            D2D_1th_request_EachCycle=Now_RAO; 	//紀錄在每個D2D週期的第一個request的RAO
 
         }
         PACB_eachRAO[Now_RAO] =PACB_SharePremble;
+        if(Now_RAO % D2D_cycle ==0 ) { D2D_1th_request_EachCycle=Now_RAO; } 	//紀錄在每個D2D週期的第一個request的RAO
 
 
 		for(int i=0; i<nMTCD;i++ )
@@ -529,7 +529,7 @@ int main()
 
                                     Success_nMTCD +=1;
                                     Successn_nMTCD_EachRAO[Now_RAO] +=1;   //Msg3 成功傳送
-                                    MTCD_Table.at(i).RA_success_RAO = Now_RAO +5; //Msg4 結束RA
+                                    MTCD_Table.at(i).RA_success_RAO = Now_RAO ; //Msg4 結束RA
                                     MTCD_Table.at(i).MTCD_RA_status ="Success";
                                     if(MTCD_Table[i].Power_level == 0){ PreStatus[3][Now_RAO] +=1;} // Success Preamble +=1
 
@@ -568,7 +568,8 @@ int main()
                                     PreStatus[3][Now_RAO] +=1;
                                     Success_nMTCD +=1;
                                     Successn_nMTCD_EachRAO[Now_RAO] +=1;   //Msg3 成功傳送
-                                    MTCD_Table.at(i).RA_success_RAO = Now_RAO +5; //Msg4 結束RA
+                                    MTCD_Table.at(i).RA_success_RAO = Now_RAO ; //Msg4 結束RA
+                                    MTCD_Table.at(i).MTCD_RA_status ="share_Success";
                                     break;
                                 }
                             }
@@ -671,7 +672,7 @@ int main()
 
     cout <<"success"<< Success_nMTCD <<" fail: "<<fail_nMTCD << endl;
 
-    cout << "Average Access Delay:" << double(totalMTCD_Access_delay) / double(Success_nMTCD) / 100 << endl;//除以100專換成秒
+    cout << "Average Access Delay:" << (double(totalMTCD_Access_delay) / double(Success_nMTCD) /100)+0.016 << endl;//除以100專換成秒
     cout <<"total MTCD"<< Success_nMTCD +fail_nMTCD << endl;
 	cout <<"collide probility:"<<Collide_probility_cumulation/finish_RAO<<endl;
 	cout << "Drop rate:" << (double(fail_nMTCD) / double(nMTCD)) * 100 << "%" << endl;
@@ -682,7 +683,7 @@ int main()
 	result_file <<"rao"<<finish_RAO<<endl;
     result_file <<"success"<< Success_nMTCD <<" fail: "<<fail_nMTCD << endl;
 	result_file << "Complete Time:" << static_cast<double>(finish_RAO) /100 << "s" << endl;
-	result_file  << "Average Access Delay:" << double(totalMTCD_Access_delay) / double(Success_nMTCD) /100 << endl;
+	result_file  << "Average Access Delay:" << (double(totalMTCD_Access_delay) / double(Success_nMTCD) /100)+0.016 << endl;
 	result_file << Success_nMTCD+ fail_nMTCD << endl;
 	result_file <<"collide probility:"<<Collide_probility_cumulation/finish_RAO<<endl;
 	result_file << "Drop rate:" << (double(fail_nMTCD) / double(nMTCD)) * 100 << "%" << endl;

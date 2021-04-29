@@ -1,7 +1,7 @@
 rao5725
 success97888 fail: 2112
 Complete Time:57.25s
-Average Access Delay:24.4064
+Average Access Delay:24.3724
 100000
 collide probility:0.261886
 Drop rate:2.112%

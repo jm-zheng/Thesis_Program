@@ -1,7 +1,7 @@
 rao3815
 success47421 fail: 2579
 Complete Time:38.15s
-Average Access Delay:5.848
+Average Access Delay:5.814
 50000
 collide probility:0.0552595
 Drop rate:5.158%

@@ -1,7 +1,7 @@
 rao2895
 success48969 fail: 1031
 Complete Time:28.95s
-Average Access Delay:10.4765
+Average Access Delay:10.4425
 50000
 collide probility:0.256387
 Drop rate:2.062%
