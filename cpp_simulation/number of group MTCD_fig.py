@@ -2,10 +2,10 @@ import matplotlib.pyplot as plt
 import random
 import numpy as np
 import pandas as pd
-dircectory_nMTCD = "50K"
+dircectory_nMTCD = "150K"
 
-Dense_Axis_index = 7 # 0:10k 1:30K 2:50k 3:100K
-Uniform_Axis_index =2
+Dense_Axis_index = 9 # 0:10k 1:30K 2:50k 3:100K
+Uniform_Axis_index =4
 
 nMTCD_group_Yaxis=[300,700,1100,2300,3500,450,1200,2000,4000,6000]  # 前5個sparse 後5個dense
 nMTCD_group_Yaxis_gap=[50,100,100,500,500,50,100,200,500,1000]  # 前5個sparse 後5個dense

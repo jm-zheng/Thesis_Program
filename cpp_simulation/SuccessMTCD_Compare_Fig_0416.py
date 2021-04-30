@@ -34,18 +34,18 @@ print(STD_withGrant_CDF.head())
 # Cumulative MTCD
 
 
-plt.plot(STD_withGrant_CDF['success'], label='STD', markevery=100, marker='', color='dodgerblue')
-plt.plot(NORA_CDF['success'],label='NORA', markevery=100, marker='P',color='c')
+plt.plot(STD_withGrant_CDF['success'], label='STD', markevery=100, marker='^', color='dodgerblue')
 plt.plot(OptimalACB_NoSIB_CDF['success'], label='Optimal ACB ', marker='D', markevery=100, color='m')
 plt.plot(Uniform_Preamble_allocation_CDF['SuccessMTCD'],label='Preamble Allocation(Uniform)', markevery=100, marker='s', color='navy')
-plt.plot(Dense_Preamble_allocation_CDF['SuccessMTCD'], label='Preamble Allocation(Dense)', markevery=100, marker='8', color='r')
-plt.plot(Uniform_Grouping_NOMA_CDF['SuccessMTCD'], label='Proposal-Grouping NOMA(Uniform)', markevery=100, marker='^', color='lime')
+plt.plot(Dense_Preamble_allocation_CDF['SuccessMTCD'], label='Preamble Allocation(Dense)', markevery=100, marker='d', color='r')
+plt.plot(NORA_CDF['success'],label='NORA', markevery=100, marker='P',color='c')
+plt.plot(Uniform_Grouping_NOMA_CDF['SuccessMTCD'], label='Proposal-Grouping NOMA(Uniform)', markevery=100, marker='v', color='lime')
 plt.plot(Dense_Grouping_NOMA_CDF['SuccessMTCD'], label='Proposal-Grouping NOMA(Dense)', markevery=100, marker='x', color='gold')
 
-plt.legend(loc=(0.75,0.1),fontsize=12)
+plt.legend(loc=(0.75,0.1),fontsize=12)  #150K (0.75,0.1)
 plt.ylim(bottom=0)
 plt.xlim(left=0)
-xlabe=[]
+xlabe = []
 if(Axis_index <2):
     for i in range(Sim_RAO):
         xlabe.append(str(i))
@@ -63,7 +63,7 @@ plt.yticks(np.arange(0,MTCD_CDF_Yaxis[Axis_index]+1000,MTCD_CDF_Yaxis_gap[Axis_i
 #plt.grid(True, ls=':')
 
 plt.title('Cumulative Success MTCDs  (nMTCD = '+dircectory_nMTCD+' )',fontsize=22)
-plt.ylabel('Number of Successful MTCDs ',fontsize=22)
+plt.ylabel('Cumulative number of Successful MTCDs ',fontsize=22)
 plt.xlabel('Simulation Time(second)',fontsize=22)
 plt.grid()
 

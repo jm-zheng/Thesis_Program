@@ -24,10 +24,7 @@ Beta_150k = pd.read_csv("NORA/Have_Grant/150K/MTCD_beta_distribution.csv")
 
 
 
-
-
-
-# Cumulative MTCD
+# Beta RA first initiate
 
 plt.plot(Beta_150k['beta_nMTCD'],label='150k MTCDs')
 plt.plot(Beta_100k['beta_nMTCD'],label='100k MTCDs')
@@ -36,14 +33,6 @@ plt.plot(Beta_30k['beta_nMTCD'],label='30k MTCDs')
 plt.plot(Beta_10k['beta_nMTCD'],label='10k MTCDs')
 
 
-
-
-#plt.plot(Grouping_NOMA_allocation_Pre_status['D2D_first_request_RAO'],label='STD - with Grant',markevery=100,marker='^')
-'''
-plt.plot(OptimalACB_CDF_MTCD_NoSIB['success'],label='Optimal ACB ',marker='s',markevery=100)
-plt.plot(Preamble_allocation_Pre_staus['SuccessMTCD'],label='Preamble Allocation',markevery=100,marker='x')
-plt.plot(Grouping_NOMA_allocation_Pre_status['SuccessMTCD'],label='Proposal-Grouping NOMA',markevery=100,marker='*')
-'''
 plt.legend(loc=7,fontsize=12)
 plt.ylim(bottom=0)
 plt.xlim(left=0)
