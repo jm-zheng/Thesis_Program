@@ -17,12 +17,13 @@ int finish_RAO =0;
 
 //double sd = 0; // standard deviation
 int numMTCDfail = 0;
-float RAtime[4][nMTCD]={0}; //0: initiate RA time   1: first RA time    2: success RA time  3: RA retransmission times
+double RAtime[4][nMTCD]={0}; //0: initiate RA time   1: first RA time    2: success RA time  3: RA retransmission times
 int PreStatus[7][simRAo]={0}; //0: number of device initiate RA    1: emtpyPre    2: colliPre    3: successPre 4:not ULgrant 5 NORA_successPre 6 NORA_not ULgrant
 int beta_nMTCD[beta_RAo]={0}; // number of device initiate RA in beta_RAo;
 double beta_proability[beta_RAo]={0}; // proability of beta in RA
 double beta_proability_ac[beta_RAo]={0}; // ac_proability of beta in RA
 int SuccessnMTCD = 0;
+double total_RA_nTransmission_cumulation = 0;
 
 double reRAtime=0;
 int SuccessnMTCDslot[simRAo] = { 0 };
@@ -272,6 +273,7 @@ int main()
 	{
 		file1 <<RAtime[0][i]<<","<<RAtime[1][i]<<","<<RAtime[2][i]<<","<<RAtime[3][i]
 			  <<endl;
+		total_RA_nTransmission_cumulation += RAtime[3][i];
 	}
 	file1.close();
 
@@ -287,11 +289,14 @@ int main()
 		}
 	}
 
+	double nMTCDs =nMTCD;  //讓變數=常數做處理
 	file1.close();
 	cout <<"success"<< SuccessnMTCD <<" fail: "<<numMTCDfail << endl;
 	cout << "Average Access Delay:" << (double(totaldelay) / double(SuccessnMTCD) /100)+0.016 << endl;//除以100專換成秒
 	cout << SuccessnMTCD+ numMTCDfail << endl;
 	cout <<"collide probility:"<<collide_probility/finish_RAO<<endl;
+	cout <<"RA total nTransmission:"<<total_RA_nTransmission_cumulation<<endl;
+    cout <<"RA Average nTransmission:"<<double(total_RA_nTransmission_cumulation)/nMTCDs<<endl;
 	cout << "Drop rate:" << (double(numMTCDfail) / double(nMTCD)) * 100 << "%" << endl;
 
 	fstream result_file;
@@ -303,6 +308,8 @@ int main()
 	result_file  << "Average Access Delay:" << (double(totaldelay) / double(SuccessnMTCD) /100)+0.016 << endl;
 	result_file << SuccessnMTCD+ numMTCDfail << endl;
 	result_file <<"collide probility:"<<collide_probility/finish_RAO<<endl;
+	result_file <<"RA total nTransmission:"<<total_RA_nTransmission_cumulation<<endl;
+    result_file <<"RA Average nTransmission:"<<double(total_RA_nTransmission_cumulation)/nMTCDs<<endl;
 	result_file << "Drop rate:" << (double(numMTCDfail) / double(nMTCD)) * 100 << "%" << endl;
 
 	result_file.close();

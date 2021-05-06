@@ -2,10 +2,10 @@
 
 using namespace std;
 
-string directory_nMTCD ="150K";
+string directory_nMTCD ="100K";
 const int nGroup =50; // group的數量
-const int nMTCD =150000;
-const int simRAo = 8800; // 1=10ms 20s
+const int nMTCD =100000;
+const int simRAo = 6500; // 1=10ms 20s
 const int Backoff_D2D = 40; //D2D backoff
 const int Backoff_RA = 20; //RA backoff
 const int D2D_cycle =8; //D2D_cycle 80ms =8 RAO
@@ -94,21 +94,15 @@ double droprate;
 int totalMTCD_Access_delay = 0; //成功設備delay時間加總
 double Collide_probility_cumulation=0;
 
+
 int AccessDelay[simRAo + 1] = { 0 };//每個dealy時間累積完成的設備
-int total_prb = 0;
-int average_prb = 0;
+int total_D2D_nRequest_cumulation = 0;
+int total_RA_nTransmission_cumulation = 0;
 vector<DEVICE> MTCD_Table ;
 
 int main()
 {
 	srand(2021);
-    fstream D2D_request_file ;
-    D2D_request_file.open("Dense\\"+directory_nMTCD+"\\Dense_with_earlydection_D2D_request.csv", fstream::out);
-    for(int x=1; x<=nGroup; x++)
-    {
-        D2D_request_file <<x<<",";
-    }
-    D2D_request_file << "total_request"<<endl;
 
     //初始化
 		//srand((unsigned)time(NULL));
@@ -129,10 +123,10 @@ int main()
 		double P =(double)rand()/(RAND_MAX+1); //0~32767/32768 compare beta proability  機率最大必須小於1
         DEVICE dev;
         dev.MTCD_number=i;
-        int g = ( rand()%(nGroup+8)); // Get the group index
+        int g = ( rand()%(nGroup+10)); // Get the group index
         if(g >49)
         {
-            if(g > 53){g = (g%53)+26; }
+            if(g >=55 ){g = (g%55)+26; }
             else  {g = ((g%nGroup)+1);}
         }
         else if(g<=49) {g = g+1;}
@@ -178,7 +172,7 @@ int main()
 
 	for( int Now_RAO=0; Now_RAO<simRAo; Now_RAO++)
 	{
-
+        D2D_total_request_eachGroup[0][Now_RAO] = Now_RAO; //紀錄file D2D Request的RAO
 		if(Now_RAO % SIB2_cycle ==0 )
         {
             PACB_SharePremble =0;
@@ -212,7 +206,7 @@ int main()
 			if(MTCD_Table[i].D2D_initate_request_RAO == Now_RAO  && MTCD_Table.at(i).MTCD_RA_status == "D2D_init" && MTCD_Table[i].nTransmit_RA < MAX_nTransmit_RA )
 			{
 				MTCD_Table.at(i).nRequest_D2D +=1;  						//MTCD 的D2D Request 次數+1
-
+                D2D_total_request_eachGroup[MTCD_Table.at(i).group][Now_RAO] +=1;  //記錄D2D各組的Request次數，為了輸出檔案用的
 				if((Now_RAO % D2D_cycle) <4 && D2D_eachgroup_request_time[MTCD_Table[i].group] < D2DRB_Pool ) // D2D 沒有超過RB pool
 				{
                     MTCD_Table.at(i).D2D_request_allocation_index= D2D_eachgroup_request_time[MTCD_Table.at(i).group];
@@ -335,18 +329,20 @@ int main()
 
 
         //------------MTCD foe END----------------------######
+        //------------------------------紀錄每次D2D的狀況-----------------------------------------------------------------------------------------------------
+
+            for(int x=1; x<=nGroup;x++ )
+            {
+                //D2D_total_request_eachGroup[x][Now_RAO] =D2D_eachgroup_request_time[x];  //紀錄每個週期的D2D request，移到上面207
+                D2D_total_cumulation_request[Now_RAO] += D2D_total_request_eachGroup[x][Now_RAO];
+                //D2D_request_file << D2D_total_request_eachGroup[x][Now_RAO] <<",";
+
+            }
+            //D2D_request_file<<D2D_total_cumulation_request[Now_RAO]<<endl;
+        //----------紀錄END------------------------------------------------------------------------
 
 		if(Now_RAO % D2D_cycle ==7)     // 一個D2D週期結束後 釋放新的設備到share pr新的設備到share preamble pool
 		{
-			for(int x=1; x<=nGroup;x++ )
-            {
-                D2D_total_request_eachGroup[x][Now_RAO] =D2D_eachgroup_request_time[x];  //紀錄每個週期的D2D request
-                D2D_total_cumulation_request[Now_RAO] += D2D_eachgroup_request_time[x];
-                D2D_request_file << D2D_total_request_eachGroup[x][Now_RAO] <<",";
-            }
-
-            D2D_request_file<<D2D_total_cumulation_request[Now_RAO]<<endl;
-
 			for(int x=1; x<=nGroup;x++ )D2D_eachgroup_request_time[x]=0; //清空 這次D2D週期的request
 			for(int i=0; i<nMTCD;i++ )
 				if(MTCD_Table[i].MTCD_RA_status=="SharePre_OutsidePool" )
@@ -587,6 +583,9 @@ int main()
             nMTCD_file <<MTCD_Table[i].nRequest_D2D<<","<<MTCD_Table[i].RA_first_RAO<<","<<MTCD_Table[i].RA_initate_RAO<<","<<MTCD_Table[i].RA_success_RAO<<",";
             nMTCD_file <<MTCD_Table[i].nTransmit_RA<<","<<MTCD_Table[i].Preamble_number<<","<<MTCD_Table[i].Power_level<<","<<MTCD_Table[i].MTCD_RA_status<<",";
             nMTCD_file <<MTCD_Table[i].D2D_request_allocation_index<<endl;
+
+            total_D2D_nRequest_cumulation += MTCD_Table[i].nRequest_D2D ; //記錄所有設備的D2D重傳次數
+            total_RA_nTransmission_cumulation += MTCD_Table[i].nTransmit_RA; //記錄所有設備的RA重傳次數
         }
     }
 
@@ -619,12 +618,38 @@ int main()
         }
     }
 
-    cout <<"success"<< Success_nMTCD <<" fail: "<<fail_nMTCD << endl;
+    fstream D2D_request_file ;
+    D2D_request_file.open("Dense\\"+directory_nMTCD+"\\Dense_with_earlydection_D2D_request.csv", fstream::out);
+    if (D2D_request_file.is_open())
+    {
+        D2D_request_file<<"RAO,";
+        for(int x=1; x<=nGroup; x++)
+        {
+            D2D_request_file <<x<<",";
+        }
+        D2D_request_file << "total_request"<<endl;
+        for(int i=0 ; i<simRAo ; i++)
+        {
+            D2D_request_file<<D2D_total_request_eachGroup[0][i]<<",";
+            for(int x=1; x<=nGroup;x++ )
+            {
+                D2D_request_file << D2D_total_request_eachGroup[x][i] <<",";
+            }
+            D2D_request_file <<D2D_total_cumulation_request[i]<<endl;
+        }
 
+    }
+
+    double nMTCDs =nMTCD;  //讓變數=常數做處理
+    cout <<"success"<< Success_nMTCD <<" fail: "<<fail_nMTCD << endl;
     cout << "Average Access Delay:" << (double(totalMTCD_Access_delay) / double(Success_nMTCD) /100)+0.016 << endl;//除以100專換成秒
     cout <<"total MTCD"<< Success_nMTCD +fail_nMTCD << endl;
 	cout <<"collide probility:"<<Collide_probility_cumulation/finish_RAO<<endl;
-	cout << "Drop rate:" << (double(fail_nMTCD) / double(nMTCD)) * 100 << "%" << endl;
+    cout <<"D2D total nRequest:"<<total_D2D_nRequest_cumulation<<endl;
+    cout <<"D2D Average nRequest:"<<double(total_D2D_nRequest_cumulation)/nMTCDs<<endl;
+    cout <<"RA total nTransmission:"<<total_RA_nTransmission_cumulation<<endl;
+    cout <<"RA Average nTransmission:"<<double(total_RA_nTransmission_cumulation)/nMTCDs<<endl;
+	cout << "Drop rate:" << (double(fail_nMTCD) / double(nMTCDs)) * 100 << "%" << endl;
 
 	fstream result_file;
 	result_file.open("Dense\\"+directory_nMTCD+"\\Dense_with_earlydection_result.txt",fstream :: out);
@@ -635,6 +660,10 @@ int main()
 	result_file  << "Average Access Delay:" << (double(totalMTCD_Access_delay) / double(Success_nMTCD) /100)+0.016 << endl;
 	result_file << Success_nMTCD+ fail_nMTCD << endl;
 	result_file <<"collide probility:"<<Collide_probility_cumulation/finish_RAO<<endl;
+    result_file <<"D2D total nRequest:"<<total_D2D_nRequest_cumulation<<endl;
+    result_file <<"D2D Average nRequest:"<<double(total_D2D_nRequest_cumulation)/nMTCDs<<endl;
+    result_file <<"RA total nTransmission:"<<total_RA_nTransmission_cumulation<<endl;
+    result_file <<"RA Average nTransmission:"<<double(total_RA_nTransmission_cumulation)/nMTCDs<<endl;
 	result_file << "Drop rate:" << (double(fail_nMTCD) / double(nMTCD)) * 100 << "%" << endl;
 
 	result_file.close();

@@ -1,7 +1,11 @@
 rao928
 success10000 fail: 0
 Complete Time:9.28s
-Average Access Delay:0.153252
+Average Access Delay:0.153045
 10000
 collide probility:0
+D2D total nRequest:19409
+D2D Average nRequest:1.9409
+RA total nTransmission:13450
+RA Average nTransmission:1.345
 Drop rate:0%

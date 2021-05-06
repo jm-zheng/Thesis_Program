@@ -3,8 +3,7 @@ import random
 import numpy as np
 import pandas as pd
 import os
-dircectory_nMTCD = "50K"
-MTCD_Position = "Dense"  # Sparse Dense
+
 Sim_RAO = 10+1  #1000 RAO = 10s  +1是因為圖表好看 15 36 40 65
 
 Axis_index = 0 # 0:10k 1:30K 2:50k 3:100K
@@ -53,8 +52,8 @@ plt.yticks(np.arange(0,MTCD_init_Yaxis[Axis_index],MTCD_init_Yaxis_gap[Axis_inde
 
 #plt.grid(True, ls=':')
 plt.legend(fontsize=16)
-plt.title('Distribution of MTCDs initiated RA.  Beta( 3,4,10s )    ',fontsize=18)
-plt.ylabel('Number of MTCDs initiated RA.  ',fontsize=16)
+plt.title('Distribution of the number of MTCDs first initiating RA.  Beta( 3,4,10s )    ',fontsize=18)
+plt.ylabel('Number of MTCDs initiating RA.  ',fontsize=16)
 plt.xlabel('Simulation Time(second).',fontsize=16)
 plt.grid()
 

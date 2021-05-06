@@ -1,7 +1,11 @@
-rao3815
-success47421 fail: 2579
-Complete Time:38.15s
-Average Access Delay:5.814
+rao1801
+success49979 fail: 21
+Complete Time:18.01s
+Average Access Delay:5.09224
 50000
-collide probility:0.0552595
-Drop rate:5.158%
+collide probility:0.0114648
+D2D total nRequest:6199973
+D2D Average nRequest:123.999
+RA total nTransmission:108913
+RA Average nTransmission:2.17826
+Drop rate:0.042%

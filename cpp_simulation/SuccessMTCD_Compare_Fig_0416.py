@@ -6,7 +6,7 @@ import os
 dircectory_nMTCD = "150K"
 
 
-Sim_RAO = 88+1  #1000 RAO = 10s  +1是因為圖表好看 15 36 40 65
+Sim_RAO = 88+1  #1000 RAO = 10s  +1是因為圖表好看 15 20 30 65 88
 Axis_index = 4 # 0:10k 1:30K 2:50k 3:100K
 
 MTCD_CDF_Yaxis=[10000,32500,50000,100000,150000]
@@ -42,7 +42,7 @@ plt.plot(NORA_CDF['success'],label='NORA', markevery=100, marker='P',color='c')
 plt.plot(Uniform_Grouping_NOMA_CDF['SuccessMTCD'], label='Proposal-Grouping NOMA(Uniform)', markevery=100, marker='v', color='lime')
 plt.plot(Dense_Grouping_NOMA_CDF['SuccessMTCD'], label='Proposal-Grouping NOMA(Dense)', markevery=100, marker='x', color='gold')
 
-plt.legend(loc=(0.75,0.1),fontsize=12)  #150K (0.75,0.1)
+plt.legend(loc=fig_legend[Axis_index],fontsize=12)  #150K (0.75,0.1)
 plt.ylim(bottom=0)
 plt.xlim(left=0)
 xlabe = []
