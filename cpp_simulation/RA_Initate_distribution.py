@@ -3,14 +3,13 @@ import random
 import numpy as np
 import pandas as pd
 import os
-dircectory_nMTCD = "100K"
-Sim_RAO = 66+1  #1000 RAO = 10s  +1是因為圖表好看 15 36 40 65
-
-Axis_index = 3 # 0:10k 1:30K 2:50k 3:100K
+dircectory_nMTCD = "150K"
+Sim_RAO = 88+1  #1000 RAO = 10s  +1是因為圖表好看 15 20 30 65 88
+Axis_index = 4 # 0:10k 1:30K 2:50k 3:100K
 
 MTCD_init_Yaxis=[250,700,1200,2300,3500]
 MTCD_init_Yaxis_gap=[25,50,100,200,250]
-MTCD_init_Xaxis_gap=[100,100,200,200,200]
+MTCD_init_Xaxis_gap=[100,100,100,200,200]
 
 
 
@@ -25,11 +24,10 @@ Dense_Grouping_NOMA_PreStatus = pd.read_csv("Goruping NOMA_allcation/Dense/"+dir
 
 
 xlabe=[]
-if(Axis_index <2):
+if( Axis_index < 3):
     for i in range(Sim_RAO):
         xlabe.append(str(i))
 else:
-
     for i in range(Sim_RAO):
         if(i%2==0):
             xlabe.append(str(i))
@@ -45,8 +43,8 @@ print(MaxGrant)
 
 
 
-plt.plot(Dense_Preamble_allocation_PreStatus['initate MTCD'],label= 'Preamble Allocation(Dense)',color='r')
-plt.plot(Uniform_Preamble_allocation_PreStatus['initate MTCD'],label= 'Preamble Allocation(Uniform)', color='navy')
+plt.plot(Dense_Preamble_allocation_PreStatus['initate MTCD'],label= 'Preamble Allocation(Dense)',color='navy')
+plt.plot(Uniform_Preamble_allocation_PreStatus['initate MTCD'],label= 'Preamble Allocation(Uniform)', color='r')
 plt.plot(OptimalACB_NoSIB_PreStatus['initate MTCD'],label= 'Optimal ACB',color='c')
 plt.plot(STD_withGrant_PreStatus['initate MTCD'],label= 'STD',color='dodgerblue')
 plt.plot(MaxGrant['STD_max'],label='Maximal Success MTCDs(30)',color='black')
@@ -56,7 +54,7 @@ plt.ylim(bottom=0)
 plt.xlim(left=0)
 plt.xticks(np.arange(0,(Sim_RAO*100),MTCD_init_Xaxis_gap[Axis_index]),labels=xlabe,fontsize=16)
 plt.yticks(np.arange(0,MTCD_init_Yaxis[Axis_index],MTCD_init_Yaxis_gap[Axis_index]),fontsize=16)
-plt.title('Distribution of the cumulative number of MTCDs initiating RA. \n(nMTCD = '+dircectory_nMTCD+', Mechanism without NOMA )',fontsize=22)
+plt.title('Distribution of the cumulative number of MTCDs initiating RA. \n( nMTCD = '+dircectory_nMTCD+', r = 10, Mechanism without NOMA )',fontsize=22)
 plt.ylabel('Number of MTCDs initiating RA.',fontsize=22)
 plt.xlabel('Simulation Time(second)',fontsize=22)
 plt.grid()
@@ -75,7 +73,7 @@ plt.ylim(bottom=0)
 plt.xlim(left=0)
 plt.xticks(np.arange(0,(Sim_RAO*100),MTCD_init_Xaxis_gap[Axis_index]),labels=xlabe,fontsize=16)
 plt.yticks(np.arange(0,MTCD_init_Yaxis[Axis_index],MTCD_init_Yaxis_gap[Axis_index]),fontsize=16)
-plt.title('Distribution of the cumulative number of MTCDs initiating RA. \n (nMTCD = '+dircectory_nMTCD+', Mechanism with NOMA )',fontsize=22)
+plt.title('Distribution of the cumulative number of MTCDs initiating RA. \n ( nMTCD = '+dircectory_nMTCD+', r = 10, Mechanism with NOMA )',fontsize=22)
 plt.ylabel('Number of MTCDs initiating RA.',fontsize=22)
 plt.xlabel('Simulation Time(second)',fontsize=22)
 plt.grid()
@@ -85,17 +83,17 @@ plt.show()
 plt.plot(STD_withGrant_PreStatus['initate MTCD'],label= 'STD',color='dodgerblue')
 plt.plot(OptimalACB_NoSIB_PreStatus['initate MTCD'],label= 'Optimal ACB',color='c')
 plt.plot(NORA_PreStatus['initate MTCD'],label= 'NORA',color='m')
-plt.plot(Uniform_Preamble_allocation_PreStatus['initate MTCD'],label= 'Preamble Allocation(Uniform)', color='navy')
-plt.plot(Dense_Preamble_allocation_PreStatus['initate MTCD'],label= 'Preamble Allocation(Dense)',color='r')
-plt.plot(Uniform_Grouping_NOMA_PreStatus['initate MTCD'],label= 'Proposal-Grouping NOMA(Uniform)',color='lime')
+plt.plot(Dense_Preamble_allocation_PreStatus['initate MTCD'],label= 'Preamble Allocation(Dense)',color='navy')
+plt.plot(Uniform_Preamble_allocation_PreStatus['initate MTCD'],label= 'Preamble Allocation(Uniform)',color='r' )
 plt.plot(Dense_Grouping_NOMA_PreStatus['initate MTCD'],label= 'Proposal-Grouping NOMA(Dense)',color='gold')
+plt.plot(Uniform_Grouping_NOMA_PreStatus['initate MTCD'],label= 'Proposal-Grouping NOMA(Uniform)',color='lime')
 
 plt.legend(fontsize=16)
 plt.ylim(bottom=0)
 plt.xlim(left=0)
 plt.xticks(np.arange(0,(Sim_RAO*100),MTCD_init_Xaxis_gap[Axis_index]),labels=xlabe,fontsize=16)
 plt.yticks(np.arange(0,MTCD_init_Yaxis[Axis_index],MTCD_init_Yaxis_gap[Axis_index]),fontsize=16)
-plt.title('Distribution of the cumulative number of MTCDs initiating RA. \n (nMTCD = '+dircectory_nMTCD+' )',fontsize=22)
+plt.title('Distribution of the cumulative number of MTCDs initiating RA. \n ( nMTCD = '+dircectory_nMTCD+', r = 10 )',fontsize=22)
 plt.ylabel('Number of MTCDs initiating RA.',fontsize=22)
 plt.xlabel('Simulation Time(second)',fontsize=22)
 plt.grid()

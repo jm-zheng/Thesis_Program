@@ -2,10 +2,10 @@
 
 using namespace std;
 
-string directory_nMTCD ="100K";
+string directory_nMTCD ="150K";
 const int nGroup =50; // group的數量
-const int nMTCD =100000;
-const int simRAo = 6500; // 1=10ms 20s
+const int nMTCD =150000;
+const int simRAo = 8800; // 1=10ms 20s
 const int Backoff_D2D = 40; //D2D backoff
 const int Backoff_RA = 20; //RA backoff
 const int D2D_cycle =8; //D2D_cycle 80ms =8 RAO

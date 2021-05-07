@@ -3,11 +3,11 @@ import random
 import numpy as np
 import pandas as pd
 import os
-dircectory_nMTCD = "100K"
-fig_nMTCD = "100k"
+dircectory_nMTCD = "150K"
+fig_nMTCD = "150k"
 
-Sim_RAO = 65+1  #1000 RAO = 10s  +1是因為圖表好看 15 36 40 65 86
-Axis_index = 3 # 0:10k 1:30K 2:50k 3:100K
+Sim_RAO = 88+1  #1000 RAO = 10s  +1是因為圖表好看 15 36 40 65 86
+Axis_index = 4 # 0:10k 1:30K 2:50k 3:100K
 
 MTCD_CDF_Yaxis=[10000,30000,50000,100000,150000]
 MTCD_CDF_Yaxis_gap=[1000,2500,5000,10000,10000]
@@ -31,10 +31,13 @@ Grouping_NOMA_allocationDense_CDF =pd.read_csv("Goruping NOMA_allcation/Dense/"+
 
 
 
-plt.plot(Grouping_NOMA_allocationDense_CDF['SuccessMTCD'],label='Proposal-Grouping NOMA(Dense)',markevery=100,marker='x')
-plt.plot(Grouping_NOMA_allocationUniform_CDF['SuccessMTCD'],label='Proposal-Grouping NOMA(Sparse)',markevery=100,marker='*')
-plt.plot(Preamble_allocationDense_CDF['SuccessMTCD'],label='Preamble Allocation(Dense) ',marker='s',markevery=100)
-plt.plot(Preamble_allocationUniform_CDF['SuccessMTCD'],label='Preamble Allocation(Sparse)',markevery=100,marker='^')
+
+
+plt.plot(Preamble_allocationUniform_CDF['SuccessMTCD'],label='Preamble Allocation(Uniform)',markevery=100, marker='s', color='r')
+plt.plot(Preamble_allocationDense_CDF['SuccessMTCD'],label='Preamble Allocation(Dense) ',markevery=100,marker='d', color='navy')
+plt.plot(Grouping_NOMA_allocationUniform_CDF['SuccessMTCD'],label='Proposal-Grouping NOMA(Uniform)',markevery=100,marker='v', color='lime')
+plt.plot(Grouping_NOMA_allocationDense_CDF['SuccessMTCD'],label='Proposal-Grouping NOMA(Dense)',markevery=100,marker='x', color='gold')
+
 
 plt.legend(loc='lower right',fontsize=16)
 plt.ylim(bottom=0)
