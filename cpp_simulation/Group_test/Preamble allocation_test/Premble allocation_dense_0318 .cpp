@@ -1,9 +1,9 @@
 ﻿#include<bits/stdc++.h>
 using namespace std;
 
-string directory_nMTCD ="50K";
-const int nMTCD = 50000;
-const int simRAo = 4000; // 1=10ms 20s
+string directory_nMTCD ="150K";
+const int nMTCD = 150000;
+const int simRAo = 8800; // 1=10ms 20s
 const int Backoff_D2D = 40; //D2D backoff
 const int Backoff_RA = 20; //RA backoff
 const int D2D_cycle =8; //D2D_cycle 80ms =8 RAO
@@ -85,7 +85,7 @@ double Collide_probility_cumulation=0;
 
 int AccessDelay[simRAo + 1] = { 0 };//每個dealy時間累積完成的設備
 uint32_t total_D2D_nRequest_cumulation = 0;
-
+int total_RA_nTransmission_cumulation = 0;
 
 vector<DEVICE> MTCD_Table ;
 
@@ -234,7 +234,7 @@ int main()
 				if(MTCD_Table[i].MTCD_RA_status=="SharePre_OutsidePool" )
                 {
                     MTCD_Table[i].MTCD_RA_status ="SharePre_RA_InsidePool";
-                    MTCD_Table.at(i).RA_initate_RAO =Now_RAO+1;
+                    MTCD_Table.at(i).RA_initate_RAO =MTCD_Table[i].D2D_initate_request_RAO+8;;
                 }
             }
 		}
@@ -366,7 +366,7 @@ int main()
                                 {
                                     fail_nMTCD +=1;
                                     MTCD_Table.at(i).nTransmit_RA +=1 ;//區隔成功跟失敗的設備重傳次數
-                                    MTCD_Table[i].MTCD_RA_status = "Broken";
+                                    MTCD_Table[i].MTCD_RA_status = "Grant Broken";
                                 }
 
                             }
@@ -417,6 +417,7 @@ int main()
             nMTCD_file <<MTCD_Table[i].nTransmit_RA<<","<<MTCD_Table[i].Preamble_number<<","<<MTCD_Table[i].MTCD_RA_status<<endl;
 
             total_D2D_nRequest_cumulation += MTCD_Table[i].nRequest_D2D ;
+            total_RA_nTransmission_cumulation += MTCD_Table[i].nTransmit_RA;
         }
     }
 
@@ -472,14 +473,15 @@ int main()
     }
 
 
-    int nMTCDs =nMTCD;  //讓變數=常數做處理
+    double nMTCDs =nMTCD;  //讓變數=常數做處理
     cout <<"success"<< Success_nMTCD <<" fail: "<<fail_nMTCD << endl;
-
     cout << "Average Access Delay:" << (double(totalMTCD_Access_delay) / double(Success_nMTCD) / 100)+0.016 << endl;//除以100專換成秒
     cout <<"total MTCD"<< Success_nMTCD +fail_nMTCD << endl;
 	cout <<"collide probility:"<<Collide_probility_cumulation/finish_RAO<<endl;
     cout <<"D2D total nRequest:"<<total_D2D_nRequest_cumulation<<endl;
-    cout <<"D2D Average nRequest:"<<double(total_D2D_nRequest_cumulation)/double(nMTCDs)<<endl;
+    cout <<"D2D Average nRequest:"<<double(total_D2D_nRequest_cumulation)/nMTCDs<<endl;
+    cout <<"RA total nTransmission:"<<total_RA_nTransmission_cumulation<<endl;
+    cout <<"RA Average nTransmission:"<<double(total_RA_nTransmission_cumulation)/nMTCDs<<endl;
 	cout << "Drop rate:" << (double(fail_nMTCD) / double(nMTCD)) * 100 << "%" << endl;
 
 	fstream result_file;
@@ -492,7 +494,9 @@ int main()
 	result_file << Success_nMTCD+ fail_nMTCD << endl;
 	result_file <<"collide probility:"<<Collide_probility_cumulation/finish_RAO<<endl;
     result_file <<"D2D total nRequest:"<<total_D2D_nRequest_cumulation<<endl;
-    result_file <<"D2D Average nRequest:"<<double(total_D2D_nRequest_cumulation)/double(nMTCDs)<<endl;
+    result_file <<"D2D Average nRequest:"<<double(total_D2D_nRequest_cumulation)/nMTCDs<<endl;
+    result_file <<"RA total nTransmission:"<<total_RA_nTransmission_cumulation<<endl;
+    result_file <<"RA Average nTransmission:"<<double(total_RA_nTransmission_cumulation)/nMTCDs<<endl;
 	result_file << "Drop rate:" << (double(fail_nMTCD) / double(nMTCD)) * 100 << "%" << endl;
 
 	result_file.close();

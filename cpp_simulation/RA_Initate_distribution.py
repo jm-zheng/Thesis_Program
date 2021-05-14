@@ -42,9 +42,8 @@ print(MaxGrant)
 # each RAO initate MTCD
 
 
-
-plt.plot(Dense_Preamble_allocation_PreStatus['initate MTCD'],label= 'Preamble Allocation(Dense)',color='navy')
 plt.plot(Uniform_Preamble_allocation_PreStatus['initate MTCD'],label= 'Preamble Allocation(Uniform)', color='r')
+plt.plot(Dense_Preamble_allocation_PreStatus['initate MTCD'],label= 'Preamble Allocation(Dense)',color='navy')
 plt.plot(OptimalACB_NoSIB_PreStatus['initate MTCD'],label= 'Optimal ACB',color='c')
 plt.plot(STD_withGrant_PreStatus['initate MTCD'],label= 'STD',color='dodgerblue')
 plt.plot(MaxGrant['STD_max'],label='Maximal Success MTCDs(30)',color='black')

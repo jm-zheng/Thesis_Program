@@ -234,7 +234,7 @@ int main()
 				if(MTCD_Table[i].MTCD_RA_status=="SharePre_OutsidePool" )
                 {
                     MTCD_Table[i].MTCD_RA_status ="SharePre_RA_InsidePool";
-                    MTCD_Table.at(i).RA_initate_RAO =Now_RAO+1;
+                    MTCD_Table.at(i).RA_initate_RAO =MTCD_Table[i].D2D_initate_request_RAO+8; //下一個周期使用sharepreamble發起
                 }
             }
 		}

@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import os
 dircectory_nMTCD = "150K"
-fig_nMTCD = "150k"
+fig_nMTCD = "150K"
 
 Sim_RAO = 88+1  #1000 RAO = 10s  +1是因為圖表好看 15 36 40 65 86
 Axis_index = 4 # 0:10k 1:30K 2:50k 3:100K
@@ -54,7 +54,7 @@ else:
 
 print(xlabe)
 
-plt.xticks(np.arange(0,(Sim_RAO*100),MTCD_CDF_Xaxis_gap[Axis_index]),labels=xlabe,fontsize=12)
+plt.xticks(np.arange(0,(Sim_RAO*100),MTCD_CDF_Xaxis_gap[Axis_index]),labels=xlabe,fontsize=16)
 plt.yticks(np.arange(0,MTCD_CDF_Yaxis[Axis_index]+1000,MTCD_CDF_Yaxis_gap[Axis_index]),fontsize=16)
 
 #plt.grid(True, ls=':')

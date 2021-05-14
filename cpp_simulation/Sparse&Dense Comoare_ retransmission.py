@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import random
 import numpy as np
 import pandas as pd
-dircectory_nMTCD = "100K"
+dircectory_nMTCD = "150K"
 Axis_index = 2 # 0:50k 1:100K 2:150K
 bar_width = 0.15  # 有四項數據
 bar_width_align=bar_width/2
@@ -61,7 +61,7 @@ plt.xlim(left=0.5)
 plt.grid()
 plt.title('The Influence of Different Position Distributions on the Number of transmissions \n ( nMTCD='+ dircectory_nMTCD+", r=10) ",fontsize=26)
 
-plt.xticks(np.arange(1,12))
+plt.xticks(np.arange(1,12),fontsize=22)
 plt.yticks(np.arange(0,Group_nTransmit_Yaxis[Axis_index],Group_nTransmit_Yaxis_gap[Axis_index]),fontsize=16)
 plt.ylabel('Number of MTCDs ',fontsize=20)
 plt.xlabel('RA transmission times',fontsize=20)
