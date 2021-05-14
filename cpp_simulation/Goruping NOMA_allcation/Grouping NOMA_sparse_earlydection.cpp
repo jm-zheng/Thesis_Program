@@ -2,10 +2,10 @@
 
 using namespace std;
 
-string directory_nMTCD ="50K";
+string directory_nMTCD ="150K";
 const int nGroup =50; // group的數量
-const int nMTCD =50000;
-const int simRAo = 3000; // 1=10ms 20s
+const int nMTCD =150000;
+const int simRAo = 8800; // 1=10ms 20s
 const int Backoff_D2D = 40; //D2D backoff
 const int Backoff_RA = 20; //RA backoff
 const int D2D_cycle =8; //D2D_cycle 80ms =8 RAO
@@ -544,7 +544,7 @@ int main()
                                 {
                                     fail_nMTCD +=1;
                                     MTCD_Table.at(i).nTransmit_RA +=1 ;//區隔成功跟失敗的設備重傳次數
-                                    MTCD_Table.at(i).MTCD_RA_status = "Broken";
+                                    MTCD_Table.at(i).MTCD_RA_status = "Grant Broken";
                                 }
 
                             }
@@ -581,7 +581,7 @@ int main()
                                 {
                                     fail_nMTCD +=1;
                                     MTCD_Table.at(i).nTransmit_RA +=1 ;//區隔成功跟失敗的設備重傳次數
-                                    MTCD_Table.at(i).MTCD_RA_status = "Broken";
+                                    MTCD_Table.at(i).MTCD_RA_status = "Grant Broken";
                                 }
 
                             }

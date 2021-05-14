@@ -1,0 +1,9 @@
+rao2392
+success49982 fail: 18
+Complete Time:23.92s
+Average Access Delay:5.56855
+50000
+collide probility:0.0116592
+D2D total nRequest:6803106
+D2D Average nRequest:136.062
+Drop rate:0.036%
