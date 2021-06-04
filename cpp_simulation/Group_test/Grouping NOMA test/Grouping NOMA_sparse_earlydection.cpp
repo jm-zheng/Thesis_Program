@@ -2,10 +2,14 @@
 
 using namespace std;
 
-string directory_nMTCD ="50K";
+string directory_nMTCD ="150K";
+string directory_ACB ="ACB_4";
 const int nGroup =50; // group的數量
-const int nMTCD =50000;
-const int simRAo = 3000; // 1=10ms 20s
+const int nMTCD =150000;
+const int simRAo = 8800; // 1=10ms 20s
+const int ACB_type = 4;
+
+
 const int Backoff_D2D = 40; //D2D backoff
 const int Backoff_RA = 20; //RA backoff
 const int D2D_cycle =8; //D2D_cycle 80ms =8 RAO
@@ -96,7 +100,7 @@ double Collide_probility_cumulation=0;
 
 int AccessDelay[simRAo + 1] = { 0 };//每個dealy時間累積完成的設備
 int total_D2D_nRequest_cumulation = 0;
-
+int total_RA_nTransmission_cumulation = 0;
 vector<DEVICE> MTCD_Table ;
 
 int main()
@@ -184,7 +188,7 @@ int main()
             }
             PACB_SharePremble = PACB_SharePremble /SIB2_cycle;
             PACB_SharePremble =PACB_SharePremble / D2D_cycle;  //算出PACB後再除於D2D_cycle，讓設備可以平均一點發起
-
+            PACB_SharePremble =PACB_SharePremble /ACB_type;  //再次調整PACB
 
         }
         PACB_eachRAO[Now_RAO] =PACB_SharePremble;
@@ -544,7 +548,7 @@ int main()
                                 {
                                     fail_nMTCD +=1;
                                     MTCD_Table.at(i).nTransmit_RA +=1 ;//區隔成功跟失敗的設備重傳次數
-                                    MTCD_Table.at(i).MTCD_RA_status = "Broken";
+                                    MTCD_Table.at(i).MTCD_RA_status = "Grant Broken";
                                 }
 
                             }
@@ -581,7 +585,7 @@ int main()
                                 {
                                     fail_nMTCD +=1;
                                     MTCD_Table.at(i).nTransmit_RA +=1 ;//區隔成功跟失敗的設備重傳次數
-                                    MTCD_Table.at(i).MTCD_RA_status = "Broken";
+                                    MTCD_Table.at(i).MTCD_RA_status = "Grant Broken";
                                 }
 
                             }
@@ -620,7 +624,7 @@ int main()
 
     fstream nMTCD_file ;
 
-    nMTCD_file.open("Uniform\\"+directory_nMTCD+"\\with_earlydection_RAtime.csv", fstream::out);
+    nMTCD_file.open("Uniform\\"+directory_ACB+"\\"+directory_nMTCD+"\\"+directory_ACB+"with_earlydection_RAtime.csv", fstream::out);
     if (nMTCD_file.is_open())
 	{
         nMTCD_file <<"MTCD_number,group,D2D_first_request_RAO,D2D_initate_request_RAO,nRequest_D2D,";
@@ -634,13 +638,14 @@ int main()
             nMTCD_file <<MTCD_Table[i].D2D_request_allocation_index<<endl;
 
             total_D2D_nRequest_cumulation += MTCD_Table[i].nRequest_D2D ; //記錄所有設備的重傳次數
+            total_RA_nTransmission_cumulation += MTCD_Table[i].nTransmit_RA;
         }
     }
 
 
 
     fstream PreStatus_file;
-    PreStatus_file.open("Uniform\\"+directory_nMTCD+"\\with_earlydection_PreStatus.csv", fstream::out);
+    PreStatus_file.open("Uniform\\"+directory_ACB+"\\"+directory_nMTCD+"\\"+directory_ACB+"with_earlydection_PreStatus.csv", fstream::out);
     if (PreStatus_file.is_open())
 	{
         PreStatus_file <<"initate MTCD,emtpyPre,collidePre,successPre,grant fail,collide probility,PACB"<<endl;
@@ -655,7 +660,7 @@ int main()
 
 
     fstream SuccessMTCD_cumulation_file;
-    SuccessMTCD_cumulation_file.open("Uniform\\"+directory_nMTCD+"\\with_earlydection_SuccessMTCD.csv", fstream::out);
+    SuccessMTCD_cumulation_file.open("Uniform\\"+directory_ACB+"\\"+directory_nMTCD+"\\"+directory_ACB+"with_earlydection_SuccessMTCD.csv", fstream::out);
     if (SuccessMTCD_cumulation_file.is_open())
 	{
         SuccessMTCD_cumulation_file <<"SuccessMTCD"<<endl;
@@ -667,7 +672,7 @@ int main()
     }
 
     fstream D2D_request_file ;
-    D2D_request_file.open("Uniform\\"+directory_nMTCD+"\\with_earlydection_D2D_request.csv", fstream::out);
+    D2D_request_file.open("Uniform\\"+directory_ACB+"\\"+directory_nMTCD+"\\"+directory_ACB+"with_earlydection_D2D_request.csv", fstream::out);
     if (D2D_request_file.is_open())
     {
         D2D_request_file<<"RAO,";
@@ -688,6 +693,7 @@ int main()
 
     }
 
+
     double nMTCDs =nMTCD;  //讓變數=常數做處理
     cout <<"success"<< Success_nMTCD <<" fail: "<<fail_nMTCD << endl;
     cout << "Average Access Delay:" << (double(totalMTCD_Access_delay) / double(Success_nMTCD) /100)+0.016 << endl;//除以100專換成秒
@@ -695,10 +701,12 @@ int main()
 	cout <<"collide probility:"<<Collide_probility_cumulation/finish_RAO<<endl;
     cout <<"D2D total nRequest:"<<total_D2D_nRequest_cumulation<<endl;
     cout <<"D2D Average nRequest:"<<double(total_D2D_nRequest_cumulation)/nMTCDs<<endl;
+    cout <<"RA total nTransmission:"<<total_RA_nTransmission_cumulation<<endl;
+    cout <<"RA Average nTransmission:"<<double(total_RA_nTransmission_cumulation)/nMTCDs<<endl;
 	cout << "Drop rate:" << (double(fail_nMTCD) / double(nMTCD)) * 100 << "%" << endl;
 
 	fstream result_file;
-	result_file.open("Uniform\\"+directory_nMTCD+"\\with_earlydection_result.txt",fstream :: out);
+	result_file.open("Uniform\\"+directory_ACB+"\\"+directory_nMTCD+"\\"+directory_ACB+"with_earlydection_result.txt",fstream :: out);
 
 	result_file <<"rao"<<finish_RAO<<endl;
     result_file <<"success"<< Success_nMTCD <<" fail: "<<fail_nMTCD << endl;
@@ -708,6 +716,8 @@ int main()
 	result_file <<"collide probility:"<<Collide_probility_cumulation/finish_RAO<<endl;
     result_file <<"D2D total nRequest:"<<total_D2D_nRequest_cumulation<<endl;
     result_file <<"D2D Average nRequest:"<<double(total_D2D_nRequest_cumulation)/nMTCDs<<endl;
+    result_file <<"RA total nTransmission:"<<total_RA_nTransmission_cumulation<<endl;
+    result_file <<"RA Average nTransmission:"<<double(total_RA_nTransmission_cumulation)/nMTCDs<<endl;
 	result_file << "Drop rate:" << (double(fail_nMTCD) / double(nMTCD)) * 100 << "%" << endl;
 
 	result_file.close();

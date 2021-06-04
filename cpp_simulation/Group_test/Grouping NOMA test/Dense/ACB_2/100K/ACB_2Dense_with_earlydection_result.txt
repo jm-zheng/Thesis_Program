@@ -1,0 +1,11 @@
+rao1956
+success99503 fail: 497
+Complete Time:19.56s
+Average Access Delay:3.24113
+100000
+collide probility:0.0583201
+D2D total nRequest:669723
+D2D Average nRequest:6.69723
+RA total nTransmission:246483
+RA Average nTransmission:2.46483
+Drop rate:0.497%

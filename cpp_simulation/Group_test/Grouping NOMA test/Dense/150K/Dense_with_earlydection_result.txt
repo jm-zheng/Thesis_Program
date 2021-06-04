@@ -1,9 +1,0 @@
-rao2560
-success148339 fail: 1661
-Complete Time:25.6s
-Average Access Delay:5.71894
-150000
-collide probility:0.0665943
-D2D total nRequest:1329528
-D2D Average nRequest:8
-Drop rate:1.10733%
