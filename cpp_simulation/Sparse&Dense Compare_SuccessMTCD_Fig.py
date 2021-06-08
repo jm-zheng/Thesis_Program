@@ -3,11 +3,11 @@ import random
 import numpy as np
 import pandas as pd
 import os
-dircectory_nMTCD = "150K"
-fig_nMTCD = "150K"
+dircectory_nMTCD = "30K"
+fig_nMTCD = "30K"
 
-Sim_RAO = 88+1  #1000 RAO = 10s  +1是因為圖表好看 15 36 40 65 86
-Axis_index = 4 # 0:10k 1:30K 2:50k 3:100K
+Sim_RAO = 20+1  #1000 RAO = 10s  +1是因為圖表好看 15 36 40 65 86
+Axis_index = 1 # 0:10k 1:30K 2:50k 3:100K
 
 MTCD_CDF_Yaxis=[10000,30000,50000,100000,150000]
 MTCD_CDF_Yaxis_gap=[1000,2500,5000,10000,10000]
@@ -59,9 +59,9 @@ plt.yticks(np.arange(0,MTCD_CDF_Yaxis[Axis_index]+1000,MTCD_CDF_Yaxis_gap[Axis_i
 
 #plt.grid(True, ls=':')
 
-plt.title('Cumulative success MTCDs between dense and uniform distribution.  \n( nMTCD='+fig_nMTCD+", r=10 )",fontsize=26)
-plt.ylabel('Cumulative number of successful MTCDs ',fontsize=22)
-plt.xlabel('Simulation Time(second)',fontsize=22)
+plt.title('Cumulative success MTCDs between dense and uniform position distribution.  \n( nMTCD='+fig_nMTCD+", ${M_{RA\_rt}}$=10)",fontsize=26)
+plt.ylabel('Cumulative number of MTCD with successful RA ',fontsize=20)
+plt.xlabel('Simulation Time(second)',fontsize=20)
 plt.grid()
 
 plt.show()

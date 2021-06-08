@@ -1,0 +1,11 @@
+rao2235
+success99521 fail: 479
+Complete Time:22.35s
+Average Access Delay:3.37759
+100000
+collide probility:0.0622338
+D2D total nRequest:669098
+D2D Average nRequest:6.69098
+RA total nTransmission:245706
+RA Average nTransmission:2.45706
+Drop rate:0.479%

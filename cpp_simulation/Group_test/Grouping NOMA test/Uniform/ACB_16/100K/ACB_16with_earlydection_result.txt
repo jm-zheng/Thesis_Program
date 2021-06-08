@@ -1,0 +1,11 @@
+rao1917
+success99387 fail: 613
+Complete Time:19.17s
+Average Access Delay:2.93728
+100000
+collide probility:0.0565892
+D2D total nRequest:663444
+D2D Average nRequest:6.63444
+RA total nTransmission:249221
+RA Average nTransmission:2.49221
+Drop rate:0.613%

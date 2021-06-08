@@ -3,11 +3,12 @@
 using namespace std;
 
 string directory_nMTCD ="150K";
-string directory_ACB ="ACB_8";
+string directory_ACB ="ACB_16";
 const int nGroup =50; // group的數量
 const int nMTCD =150000;
 const int simRAo = 8800; // 1=10ms 20s
-const int ACB_type = 8;
+const int ACB_type = 1;
+const int barring_time =3;
 
 const int Backoff_D2D = 40; //D2D backoff
 const int Backoff_RA = 20; //RA backoff
@@ -254,7 +255,7 @@ int main()
 				}
                 else
                 {
-                    MTCD_Table[i].RA_initate_RAO = Now_RAO+1;
+                   MTCD_Table.at(i).RA_initate_RAO = Now_RAO+((rand()%barring_time)+1);
                 }
 			}
 		}

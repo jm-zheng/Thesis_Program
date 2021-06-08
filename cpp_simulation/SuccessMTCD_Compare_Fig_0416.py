@@ -62,9 +62,9 @@ plt.yticks(np.arange(0,MTCD_CDF_Yaxis[Axis_index]+1000,MTCD_CDF_Yaxis_gap[Axis_i
 
 #plt.grid(True, ls=':')
 
-plt.title('Cumulative Success MTCDs  ( nMTCD = '+dircectory_nMTCD+', r = 10 )',fontsize=22)
-plt.ylabel('Cumulative number of Successful MTCDs ',fontsize=22)
-plt.xlabel('Simulation Time(second)',fontsize=22)
+plt.title('Cumulative Success MTCDs.  ( nMTCD = '+dircectory_nMTCD+", ${M_{RA\_rt}}$=10)",fontsize=22)
+plt.ylabel('Cumulative number of MTCD with successful RA ',fontsize=20)
+plt.xlabel('Simulation Time(second)',fontsize=20)
 plt.grid()
 
 plt.show()

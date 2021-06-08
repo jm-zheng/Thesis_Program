@@ -2,10 +2,10 @@
 
 using namespace std;
 
-string directory_nMTCD ="150K";
+string directory_nMTCD ="100K";
 const int nGroup =50; // group的數量
-const int nMTCD =150000;
-const int simRAo = 8800; // 1=10ms 20s
+const int nMTCD =100000;
+const int simRAo = 6500; // 1=10ms 20s
 const int Backoff_D2D = 40; //D2D backoff
 const int Backoff_RA = 20; //RA backoff
 const int D2D_cycle =8; //D2D_cycle 80ms =8 RAO
@@ -297,6 +297,7 @@ int main()
 				if(MTCD_Table.at(i).P_sharePre_access < PACB_SharePremble)
 				{
                     //MTCD_Table.at(i).MTCD_RA_status = "D2D_init";
+                    if(MTCD_Table.at(i).RA_first_RAO == 0){MTCD_Table.at(i).RA_first_RAO = Now_RAO;}    //有可能設備第一次使用的是share preamle access
 					MTCD_Table.at(i).RA_initate_RAO=Now_RAO;
 					MTCD_Table.at(i).Preamble_number = (rand() %nSharePre)+1 + 54-nSharePre;  //使用哪個SharePreamble發起RA
                     nMTCDinit_SharePremble[Now_RAO % SIB2_cycle]+=1;   //記錄這個RAO使用sharepreamble的MTCD數量累加

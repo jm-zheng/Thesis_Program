@@ -2,10 +2,10 @@
 
 using namespace std;
 
-string directory_nMTCD ="150K";
+string directory_nMTCD ="100K";
 const int nGroup =50; // group的數量
-const int nMTCD =150000;
-const int simRAo = 8800; // 1=10ms 20s
+const int nMTCD =100000;
+const int simRAo = 6500; // 1=10ms 20s
 const int Backoff_D2D = 40; //D2D backoff
 const int Backoff_RA = 20; //RA backoff
 const int D2D_cycle =8; //D2D_cycle 80ms =8 RAO
@@ -244,6 +244,7 @@ int main()
 				if(MTCD_Table[i].P_sharePre_access < PACB_SharePremble)
 				{
                     //MTCD_Table[i].MTCD_RA_status = "D2D_RA";
+                    if(MTCD_Table.at(i).RA_first_RAO == 0){MTCD_Table.at(i).RA_first_RAO = Now_RAO;}    //有可能設備第一次使用的是share preamle access
 					MTCD_Table[i].RA_initate_RAO=Now_RAO;
 					MTCD_Table[i].Preamble_number = (rand() %nSharePre)+1 + 54-nSharePre;  //使用哪個SharePreamble發起RA
                     nMTCDinit_SharePremble[Now_RAO % SIB2_cycle]+=1;   //記錄這個RAO使用sharepreamble的MTCD數量累加
@@ -269,7 +270,7 @@ int main()
                         if(D2D_eachgroup_request_time[MTCD_Table.at(i).group] < D2D_cycle)  //D2D_cycle次數
                         {
                             //紀錄head分配第一次RA的RAO
-                            if(MTCD_Table.at(i).RA_first_RAO == 0)MTCD_Table.at(i).RA_first_RAO = D2D_1th_request_EachCycle + MTCD_Table.at(i).D2D_request_allocation_index + D2D_cycle;
+                            if(MTCD_Table.at(i).RA_first_RAO == 0){MTCD_Table.at(i).RA_first_RAO = D2D_1th_request_EachCycle + MTCD_Table.at(i).D2D_request_allocation_index + D2D_cycle;}
                             MTCD_Table.at(i).RA_initate_RAO = D2D_1th_request_EachCycle + MTCD_Table.at(i).D2D_request_allocation_index + D2D_cycle;	//紀錄head分配每次RA的RAO ex: 0+(total request-1)1+8 =9 下次D2D週期第2個RAO發起
                             MTCD_Table.at(i).Preamble_number = MTCD_Table.at(i).group;
                             MTCD_Table.at(i).Power_level =0;
@@ -278,14 +279,14 @@ int main()
                         {
                             if(MTCD_Table.at(i).D2D_request_allocation_index< Threshold_PowerAllocation )  //在index 16 或19的演算法
                             {
-                                if(MTCD_Table.at(i).RA_first_RAO == 0)MTCD_Table.at(i).RA_first_RAO = D2D_1th_request_EachCycle + (MTCD_Table.at(i).D2D_request_allocation_index %4) + D2D_cycle;
+                                if(MTCD_Table.at(i).RA_first_RAO == 0){MTCD_Table.at(i).RA_first_RAO = D2D_1th_request_EachCycle + (MTCD_Table.at(i).D2D_request_allocation_index %4) + D2D_cycle;}
                                     MTCD_Table.at(i).RA_initate_RAO = D2D_1th_request_EachCycle +(MTCD_Table.at(i).D2D_request_allocation_index %4) + D2D_cycle;	//紀錄head分配每次RA的RAO ex: 0+(total request % 4)1+8 =9 下次D2D週期第2個RAO發起
                                     MTCD_Table.at(i).Preamble_number = MTCD_Table.at(i).group;
                                     MTCD_Table.at(i).Power_level =(MTCD_Table.at(i).D2D_request_allocation_index/4);
                             }
                             else
                             {
-                                    if(MTCD_Table.at(i).RA_first_RAO == 0)MTCD_Table.at(i).RA_first_RAO = D2D_1th_request_EachCycle + ((MTCD_Table.at(i).D2D_request_allocation_index%Threshold_PowerAllocation%4)+4) + D2D_cycle;
+                                    if(MTCD_Table.at(i).RA_first_RAO == 0){MTCD_Table.at(i).RA_first_RAO = D2D_1th_request_EachCycle + ((MTCD_Table.at(i).D2D_request_allocation_index%Threshold_PowerAllocation%4)+4) + D2D_cycle;}
                                     MTCD_Table.at(i).RA_initate_RAO = D2D_1th_request_EachCycle +((MTCD_Table.at(i).D2D_request_allocation_index % Threshold_PowerAllocation%4)+4) + D2D_cycle;	//紀錄head分配每次RA的RAO ex: 0+(total request %4 + 4)1+8 =9 下次D2D週期第2個RAO發起
                                     MTCD_Table.at(i).Preamble_number = MTCD_Table.at(i).group;
                                     MTCD_Table.at(i).Power_level =((MTCD_Table.at(i).D2D_request_allocation_index % Threshold_PowerAllocation)/4);
@@ -298,7 +299,7 @@ int main()
                         if(D2D_eachgroup_request_time[MTCD_Table.at(i).group] < D2D_cycle)  //D2D_cycle次數
                         {
                             //紀錄head分配第一次RA的RAO
-                            if(MTCD_Table.at(i).RA_first_RAO == 0)MTCD_Table.at(i).RA_first_RAO = D2D_1th_request_EachCycle + (D2D_cycle -1 - MTCD_Table.at(i).D2D_request_allocation_index ) + D2D_cycle;  //從26group開始從D2D週期的最後一個RA開始分配
+                            if(MTCD_Table.at(i).RA_first_RAO == 0){MTCD_Table.at(i).RA_first_RAO = D2D_1th_request_EachCycle + (D2D_cycle -1 - MTCD_Table.at(i).D2D_request_allocation_index ) + D2D_cycle;}  //從26group開始從D2D週期的最後一個RA開始分配
                             MTCD_Table.at(i).RA_initate_RAO = MTCD_Table.at(i).RA_first_RAO = D2D_1th_request_EachCycle + (D2D_cycle -1 - MTCD_Table.at(i).D2D_request_allocation_index ) + D2D_cycle;	//紀錄head分配每次RA的RAO ex: 0+(total request-1)1+8 =9 下次D2D週期第2個RAO發起
                             MTCD_Table.at(i).Preamble_number = MTCD_Table.at(i).group;
                             MTCD_Table.at(i).Power_level =0;
@@ -308,7 +309,7 @@ int main()
                         {
                             if(MTCD_Table.at(i).D2D_request_allocation_index < Threshold_PowerAllocation )  //在index 16 或19的演算法
                             {
-                                if(MTCD_Table.at(i).RA_first_RAO == 0)MTCD_Table.at(i).RA_first_RAO = D2D_1th_request_EachCycle + D2D_cycle -1 -(MTCD_Table.at(i).D2D_request_allocation_index%4) + D2D_cycle;  // D2D週期起始RAO + (從第7個RAO)D2D週期的最後一個RA開始分配 + 下個D2D週期的時候發
+                                if(MTCD_Table.at(i).RA_first_RAO == 0){MTCD_Table.at(i).RA_first_RAO = D2D_1th_request_EachCycle + D2D_cycle -1 -(MTCD_Table.at(i).D2D_request_allocation_index%4) + D2D_cycle;}  // D2D週期起始RAO + (從第7個RAO)D2D週期的最後一個RA開始分配 + 下個D2D週期的時候發
                                     MTCD_Table.at(i).RA_initate_RAO = D2D_1th_request_EachCycle + (D2D_cycle -1 - MTCD_Table.at(i).D2D_request_allocation_index%4) + D2D_cycle;	//紀錄head分配每次RA的RAO ex: 0+(total request % 4)1+8 =9 下次D2D週期第2個RAO發起
                                     MTCD_Table.at(i).Preamble_number = MTCD_Table.at(i).group;
                                     MTCD_Table.at(i).Power_level =(MTCD_Table.at(i).D2D_request_allocation_index /4);
@@ -316,7 +317,7 @@ int main()
                             }
                             else
                             {
-                                    if(MTCD_Table.at(i).RA_first_RAO == 0)MTCD_Table.at(i).RA_first_RAO = D2D_1th_request_EachCycle + (D2D_cycle -5 -(MTCD_Table.at(i).D2D_request_allocation_index %Threshold_PowerAllocation)%4) + D2D_cycle; // D2D週期起始RAO + (從第3個RAO開始)D2D週期的最後一個RA開始分配 + 下個D2D週期的時候發
+                                    if(MTCD_Table.at(i).RA_first_RAO == 0){MTCD_Table.at(i).RA_first_RAO = D2D_1th_request_EachCycle + (D2D_cycle -5 -(MTCD_Table.at(i).D2D_request_allocation_index %Threshold_PowerAllocation)%4) + D2D_cycle;} // D2D週期起始RAO + (從第3個RAO開始)D2D週期的最後一個RA開始分配 + 下個D2D週期的時候發
                                     MTCD_Table.at(i).RA_initate_RAO = D2D_1th_request_EachCycle + (D2D_cycle -5 -(MTCD_Table.at(i).D2D_request_allocation_index %Threshold_PowerAllocation)%4) + D2D_cycle;	//紀錄head分配每次RA的RAO ex: 0+(total request %4 + 4)1+8 =9 下次D2D週期第2個RAO發起
                                     MTCD_Table.at(i).Preamble_number = MTCD_Table.at(i).group;
                                     MTCD_Table.at(i).Power_level =((MTCD_Table.at(i).D2D_request_allocation_index %Threshold_PowerAllocation)/4);
