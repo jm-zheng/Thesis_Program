@@ -3,9 +3,9 @@ import random
 import numpy as np
 import pandas as pd
 import os
-dircectory_nMTCD = "10K"
-Sim_RAO = 15+1  #1000 RAO = 10s  +1是因為圖表好看 15 20 30 65 88
-Axis_index = 0 # 0:10k 1:30K 2:50k 3:100K
+dircectory_nMTCD = "150K"
+Sim_RAO =88+1  #1000 RAO = 10s  +1是因為圖表好看 15 20 30 65 88
+Axis_index = 4 # 0:10k 1:30K 2:50k 3:100K
 
 MTCD_init_Yaxis=[250,700,1200,2300,3500]
 MTCD_init_Yaxis_gap=[25,50,100,200,250]
@@ -53,7 +53,7 @@ plt.ylim(bottom=0)
 plt.xlim(left=0)
 plt.xticks(np.arange(0,(Sim_RAO*100),MTCD_init_Xaxis_gap[Axis_index]),labels=xlabe,fontsize=16)
 plt.yticks(np.arange(0,MTCD_init_Yaxis[Axis_index],MTCD_init_Yaxis_gap[Axis_index]),fontsize=16)
-plt.title('Distribution of the cumulative number of MTCDs initiating RA. \n( nMTCD='+dircectory_nMTCD+", ${M_{RA\_rt}}$=10, Mechanism without NOMA )",fontsize=22)
+#plt.title('Distribution of the cumulative number of MTCDs initiating RA. \n( nMTCD='+dircectory_nMTCD+", ${M_{RA\_rt}}$=10, Mechanism without NOMA )",fontsize=22)
 plt.ylabel('Number of MTCDs initiating RA.',fontsize=22)
 plt.xlabel('Simulation Time(second)',fontsize=22)
 plt.grid()
@@ -72,7 +72,7 @@ plt.ylim(bottom=0)
 plt.xlim(left=0)
 plt.xticks(np.arange(0,(Sim_RAO*100),MTCD_init_Xaxis_gap[Axis_index]),labels=xlabe,fontsize=16)
 plt.yticks(np.arange(0,MTCD_init_Yaxis[Axis_index],MTCD_init_Yaxis_gap[Axis_index]),fontsize=16)
-plt.title('Distribution of the cumulative number of MTCDs initiating RA. \n ( nMTCD='+dircectory_nMTCD+", ${M_{RA\_rt}}$=10, Mechanism with NOMA )",fontsize=22)
+#plt.title('Distribution of the cumulative number of MTCDs initiating RA. \n ( nMTCD='+dircectory_nMTCD+", ${M_{RA\_rt}}$=10, Mechanism with NOMA )",fontsize=22)
 plt.ylabel('Number of MTCDs initiating RA.',fontsize=22)
 plt.xlabel('Simulation Time(second)',fontsize=22)
 plt.grid()
@@ -92,7 +92,7 @@ plt.ylim(bottom=0)
 plt.xlim(left=0)
 plt.xticks(np.arange(0,(Sim_RAO*100),MTCD_init_Xaxis_gap[Axis_index]),labels=xlabe,fontsize=16)
 plt.yticks(np.arange(0,MTCD_init_Yaxis[Axis_index],MTCD_init_Yaxis_gap[Axis_index]),fontsize=16)
-plt.title('Distribution of the cumulative number of MTCDs initiating RA. \n ( nMTCD = '+dircectory_nMTCD+", ${M_{RA\_rt}}$=10 )",fontsize=22)
+#plt.title('Distribution of the cumulative number of MTCDs initiating RA. \n ( nMTCD = '+dircectory_nMTCD+", ${M_{RA\_rt}}$=10 )",fontsize=22)
 plt.ylabel('Number of MTCDs initiating RA.',fontsize=22)
 plt.xlabel('Simulation Time(second)',fontsize=22)
 plt.grid()

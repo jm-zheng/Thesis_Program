@@ -64,7 +64,7 @@ plt.title('The Influence of Different Position Distributions on the Number of tr
 plt.xticks(np.arange(1,12),fontsize=22)
 plt.yticks(np.arange(0,Group_nTransmit_Yaxis[Axis_index],Group_nTransmit_Yaxis_gap[Axis_index]),fontsize=16)
 plt.ylabel('Number of MTCDs ',fontsize=20)
-plt.xlabel('RA transmission times',fontsize=20)
+plt.xlabel('Preamble transmission times',fontsize=20)
 
 
 plt.show()

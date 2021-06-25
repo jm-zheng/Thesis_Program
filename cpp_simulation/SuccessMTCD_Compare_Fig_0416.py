@@ -3,11 +3,11 @@ import random
 import numpy as np
 import pandas as pd
 import os
-dircectory_nMTCD = "10K"
+dircectory_nMTCD = "150K"
 
 
-Sim_RAO = 15+1  #1000 RAO = 10s  +1是因為圖表好看 15 20 30 65 88
-Axis_index = 0 # 0:10k 1:30K 2:50k 3:100K 4:150K
+Sim_RAO = 88+1  #1000 RAO = 10s  +1是因為圖表好看 15 20 30 65 88
+Axis_index = 4 # 0:10k 1:30K 2:50k 3:100K 4:150K
 
 MTCD_CDF_Yaxis=[10000,32500,50000,100000,150000]
 MTCD_CDF_Yaxis_gap=[1000,2500,5000,10000,10000]
@@ -62,9 +62,9 @@ plt.yticks(np.arange(0,MTCD_CDF_Yaxis[Axis_index]+1000,MTCD_CDF_Yaxis_gap[Axis_i
 
 #plt.grid(True, ls=':')
 
-plt.title('Cumulative Success MTCDs.  ( nMTCD = '+dircectory_nMTCD+", ${M_{RA\_rt}}$=10)",fontsize=22)
-plt.ylabel('Cumulative number of MTCD with successful RA ',fontsize=20)
-plt.xlabel('Simulation Time(second)',fontsize=20)
+#plt.title('Cumulative Success MTCDs.  ( nMTCD = '+dircectory_nMTCD+", ${M_{RA\_rt}}$=10)",fontsize=22)
+plt.ylabel('Cumulative number of MTCD with successful RA ',fontsize=22)
+plt.xlabel('Simulation Time(second)',fontsize=22)
 plt.grid()
 
 plt.show()
