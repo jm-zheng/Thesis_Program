@@ -1,9 +1,9 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-string directory_nMTCD ="150K";
-const int nMTCD=150000;
-const int simRAo =8800; // 1=10ms
+string directory_nMTCD ="10K";
+const int nMTCD=10000;
+const int simRAo =1500; // 1=10ms
 //const int interRAo = 5; // 10: index 3    5: index 6
 //const int cell_r = 1000;
 //const int d2d_r = 100;
@@ -273,7 +273,14 @@ int main()
 	{
 		file1 <<RAtime[0][i]<<","<<RAtime[1][i]<<","<<RAtime[2][i]<<","<<RAtime[3][i]
 			  <<endl;
-		total_RA_nTransmission_cumulation += RAtime[3][i];
+		if(RAtime[3][i] > 10)
+		{
+			total_RA_nTransmission_cumulation += 10;
+		}
+		else
+		{
+			total_RA_nTransmission_cumulation += RAtime[3][i];
+		}
 	}
 	file1.close();
 

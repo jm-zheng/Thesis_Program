@@ -1,9 +1,9 @@
 ﻿#include<bits/stdc++.h>
 using namespace std;
 
-string directory_nMTCD ="150K";
-const int nMTCD = 150000;
-const int simRAo = 8800; // 1=10ms 20s
+string directory_nMTCD ="10K";
+const int nMTCD = 10000;
+const int simRAo = 1500; // 1=10ms 20s
 const int Backoff_D2D = 40; //D2D backoff
 const int Backoff_RA = 20; //RA backoff
 const int D2D_cycle =8; //D2D_cycle 80ms =8 RAO
@@ -417,7 +417,15 @@ int main()
             nMTCD_file <<MTCD_Table[i].nTransmit_RA<<","<<MTCD_Table[i].Preamble_number<<","<<MTCD_Table[i].MTCD_RA_status<<endl;
 
             total_D2D_nRequest_cumulation += MTCD_Table[i].nRequest_D2D ;
-            total_RA_nTransmission_cumulation += MTCD_Table[i].nTransmit_RA;
+            if(MTCD_Table[i].nTransmit_RA > 10)
+            {
+                total_RA_nTransmission_cumulation += 10;
+            }
+            else
+            {
+                total_RA_nTransmission_cumulation += MTCD_Table[i].nTransmit_RA;
+            }
+
         }
     }
 

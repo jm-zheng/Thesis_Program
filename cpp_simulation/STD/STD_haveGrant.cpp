@@ -266,8 +266,15 @@ int main()
 	{
 		file1 <<RAtime[0][i]<<","<<RAtime[1][i]<<","<<RAtime[2][i]<<","<<RAtime[3][i]
 			  <<endl;
+		if(RAtime[3][i] > 10)
+		{
+			total_RA_nTransmission_cumulation += 10;
+		}
+		else
+		{
+			total_RA_nTransmission_cumulation += RAtime[3][i];
+		}
 
-		total_RA_nTransmission_cumulation += RAtime[3][i];
 	}
 	file1.close();
 

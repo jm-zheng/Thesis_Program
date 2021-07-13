@@ -16,7 +16,7 @@ Dense_Grouping_NOMA_allocation_RAtime =pd.read_csv("Goruping NOMA_allcation/Dens
 #Grouping_NOMA_allocation_RAtime =pd.read_csv("Premble_allocation/Dense/"+dircectory_nMTCD+"/Dense_PreambleAllocation_RAtime.csv")
 
 nMTCD_group_dense = Dense_Grouping_NOMA_allocation_RAtime["group"].value_counts().sort_index().plot.bar()
-
+print(Dense_Grouping_NOMA_allocation_RAtime["group"].value_counts().sort_index())
 
 
 plt.ylim(bottom=0)

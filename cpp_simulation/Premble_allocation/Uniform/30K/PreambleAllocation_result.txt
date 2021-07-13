@@ -6,6 +6,6 @@ Average Access Delay:2.05087
 collide probility:0.0230045
 D2D total nRequest:1433882
 D2D Average nRequest:47.7961
-RA total nTransmission:54417
-RA Average nTransmission:1.8139
+RA total nTransmission:54413
+RA Average nTransmission:1.81377
 Drop rate:0.0133333%

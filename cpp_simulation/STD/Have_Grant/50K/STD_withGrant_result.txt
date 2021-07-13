@@ -4,6 +4,6 @@ Complete Time:9.62s
 Average Access Delay:0.0452612
 50000
 collide probility:0.725552
-RA total nTransmission:531859
-RA Average nTransmission:10.6372
+RA total nTransmission:483984
+RA Average nTransmission:9.67968
 Drop rate:95.75%
