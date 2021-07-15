@@ -6,7 +6,7 @@ dircectory_nMTCD = "100K"
 Axis_index = 3 # 0:50k 1:100K 2:150K
 bar_width = 0.15  # 有四項數據
 bar_width_align=bar_width/2
-
+X_axis_list =['1','2','3','4','5','6','7','8','9','10','fail' ]
 Group_nTransmit_Yaxis=[11000,30000,50000,60000,80000] # 3 : 60000
 Group_nTransmit_Yaxis_gap=[1000,3000,5000,5000,10000]
 
@@ -36,15 +36,15 @@ print(Dense_Preamble_allocationDense_nTransmit_RA.sum())
 #10k 2 2
 plt.bar(np.arange(1,12)-(bar_width*2-bar_width_align), Uniform_Grouping_NOMA_nTransmit_RA,width=bar_width,color="yellow",label="Grouping NOMA(Uniform)")
 plt.bar(np.arange(1,12)-(bar_width*1-bar_width_align), Dense_Grouping_NOMA_nTransmit_RA,width=bar_width,color="yellowgreen",label="Grouping NOMA(Dense)")
-plt.bar(np.arange(1,12)+(bar_width*1-bar_width_align), Uniform_Preamble_allocation_nTransmit_RA,width=bar_width,color="r",label="Preamble allocationDense(Uniform)")
-plt.bar(np.arange(1,12)+(bar_width*2-bar_width_align), Dense_Preamble_allocationDense_nTransmit_RA,width=bar_width,color="tomato",label="Preamble allocationDense(Dense)")
+plt.bar(np.arange(1,12)+(bar_width*1-bar_width_align), Uniform_Preamble_allocation_nTransmit_RA,width=bar_width,color="r",label="Preamble allocation(Uniform)")
+plt.bar(np.arange(1,12)+(bar_width*2-bar_width_align), Dense_Preamble_allocationDense_nTransmit_RA,width=bar_width,color="tomato",label="Preamble allocation(Dense)")
 
 plt.legend(loc='upper center',fontsize=16)
 plt.ylim(bottom=0)
 plt.xlim(left=0.5)
 #plt.title('MTCDs preamble transmission times. ( nMTCD='+ dircectory_nMTCD+", ${M_{RA\_rt}}$=10)",fontsize=26)
 
-plt.xticks(np.arange(1,12))
+plt.xticks(np.arange(1,12),X_axis_list,fontsize=18)
 plt.yticks(np.arange(0,Group_nTransmit_Yaxis[Axis_index],Group_nTransmit_Yaxis_gap[Axis_index]),fontsize=16)
 plt.ylabel('Number of MTCDs ',fontsize=20)
 plt.xlabel('Preamble transmission times',fontsize=20)
