@@ -1,11 +1,11 @@
-rao2458
-success148552 fail: 1448
-Complete Time:24.58s
-Average Access Delay:5.53469
+rao2486
+success148498 fail: 1502
+Complete Time:24.86s
+Average Access Delay:5.53646
 150000
-collide probility:0.0663367
-D2D total nRequest:1319479
-D2D Average nRequest:8.79653
-RA total nTransmission:464342
-RA Average nTransmission:3.09561
-Drop rate:0.965333%
+collide probility:0.0659396
+D2D total nRequest:1318285
+D2D Average nRequest:8.78857
+RA total nTransmission:463179
+RA Average nTransmission:3.08786
+Drop rate:1.00133%

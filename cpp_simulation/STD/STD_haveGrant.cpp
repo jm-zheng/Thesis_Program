@@ -17,6 +17,7 @@ int finish_RAO =0;
 
 //double sd = 0; // standard deviation
 int numMTCDfail = 0;
+double MTCD_RA_probility[nMTCD]={0};
 double RAtime[4][nMTCD]={0}; //0: initiate RA time   1: first RA time    2: success RA time  3: RA retransmission times
 int PreStatus[5][simRAo]={0}; //0: number of device initiate RA    1: emtpyPre    2: colliPre    3: successPre 4:not ULgrant
 int beta_nMTCD[simRAo]={0}; // number of device initiate RA in beta_RAo;
@@ -49,6 +50,8 @@ int main()
     ////////// generate RAtime in each MTCD
     for( int a=0; a <nMTCD; ++a ){
         double i = (double)rand()/(RAND_MAX+1);
+		MTCD_RA_probility[a] = i;
+
         for( int b=0; b <beta_RAo; ++b )
             if( i < beta_proability_ac[b] ){
                 RAtime[0][a] = b;
@@ -277,6 +280,27 @@ int main()
 
 	}
 	file1.close();
+
+	fstream file_RA_probility;
+	file_RA_probility.open("RA_probility\\"+directory_nMTCD+"\\RA_probility.csv" , fstream:: out);
+
+	for(int i=0;i<nMTCD;i++)
+	{
+		file_RA_probility<<MTCD_RA_probility[i]<<endl;
+	}
+	file_RA_probility.close();
+
+	fstream file_RA_Beta;
+	file_RA_Beta.open("RA_probility\\"+directory_nMTCD+"\\RA_Beta.csv" , fstream:: out);
+
+	for(int i=0;i<beta_RAo;i++)
+	{
+		file_RA_Beta<<beta_proability_ac[i]<<endl;
+	}
+	file_RA_Beta.close();
+
+
+
 
 	double nMTCDs =nMTCD;  //讓變數=常數做處理
 	cout <<"success"<< SuccessnMTCD <<" fail: "<<numMTCDfail << endl;

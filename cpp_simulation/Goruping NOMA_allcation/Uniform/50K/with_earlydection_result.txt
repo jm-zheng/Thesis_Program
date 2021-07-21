@@ -1,11 +1,11 @@
 rao968
 success49902 fail: 98
 Complete Time:9.68s
-Average Access Delay:0.265358
+Average Access Delay:0.253843
 50000
-collide probility:0.0264004
-D2D total nRequest:132160
-D2D Average nRequest:2.6432
-RA total nTransmission:72327
-RA Average nTransmission:1.44654
+collide probility:0.0253673
+D2D total nRequest:128421
+D2D Average nRequest:2.56842
+RA total nTransmission:71113
+RA Average nTransmission:1.42226
 Drop rate:0.196%

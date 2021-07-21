@@ -42,7 +42,7 @@ plt.bar(np.arange(1,12)+(bar_width*2-bar_width_align), Dense_Preamble_allocation
 plt.legend(loc='upper center',fontsize=16)
 plt.ylim(bottom=0)
 plt.xlim(left=0.5)
-#plt.title('MTCDs preamble transmission times. ( nMTCD='+ dircectory_nMTCD+", ${M_{RA\_rt}}$=10)",fontsize=26)
+plt.title('MTCDs preamble transmission times. ( nMTCD='+ dircectory_nMTCD+", ${M_{RA\_rt}}$=10)",fontsize=26)
 
 plt.xticks(np.arange(1,12),X_axis_list,fontsize=18)
 plt.yticks(np.arange(0,Group_nTransmit_Yaxis[Axis_index],Group_nTransmit_Yaxis_gap[Axis_index]),fontsize=16)

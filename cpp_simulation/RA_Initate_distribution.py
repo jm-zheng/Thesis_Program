@@ -41,7 +41,7 @@ MaxGrant.insert(1,'NOMA_max',90)
 print(MaxGrant)
 # each RAO initate MTCD
 
-
+'''
 plt.plot(Uniform_Preamble_allocation_PreStatus['initate MTCD'],label= 'Preamble Allocation(Uniform)', color='r')
 plt.plot(Dense_Preamble_allocation_PreStatus['initate MTCD'],label= 'Preamble Allocation(Dense)',color='navy')
 plt.plot(OptimalACB_NoSIB_PreStatus['initate MTCD'],label= 'Optimal ACB',color='c')
@@ -53,7 +53,7 @@ plt.ylim(bottom=0)
 plt.xlim(left=0)
 plt.xticks(np.arange(0,(Sim_RAO*100),MTCD_init_Xaxis_gap[Axis_index]),labels=xlabe,fontsize=16)
 plt.yticks(np.arange(0,MTCD_init_Yaxis[Axis_index],MTCD_init_Yaxis_gap[Axis_index]),fontsize=16)
-#plt.title('Distribution of the cumulative number of MTCDs initiating RA. \n( nMTCD='+dircectory_nMTCD+", ${M_{RA\_rt}}$=10, Mechanism without NOMA )",fontsize=22)
+plt.title('Distribution of the cumulative number of MTCDs initiating RA. \n( nMTCD='+dircectory_nMTCD+", ${M_{RA\_rt}}$=10, Mechanism without NOMA )",fontsize=22)
 plt.ylabel('Number of MTCDs initiating RA.',fontsize=22)
 plt.xlabel('Simulation Time(second)',fontsize=22)
 plt.grid()
@@ -72,12 +72,12 @@ plt.ylim(bottom=0)
 plt.xlim(left=0)
 plt.xticks(np.arange(0,(Sim_RAO*100),MTCD_init_Xaxis_gap[Axis_index]),labels=xlabe,fontsize=16)
 plt.yticks(np.arange(0,MTCD_init_Yaxis[Axis_index],MTCD_init_Yaxis_gap[Axis_index]),fontsize=16)
-#plt.title('Distribution of the cumulative number of MTCDs initiating RA. \n ( nMTCD='+dircectory_nMTCD+", ${M_{RA\_rt}}$=10, Mechanism with NOMA )",fontsize=22)
+plt.title('Distribution of the cumulative number of MTCDs initiating RA. \n ( nMTCD='+dircectory_nMTCD+", ${M_{RA\_rt}}$=10, Mechanism with NOMA )",fontsize=22)
 plt.ylabel('Number of MTCDs initiating RA.',fontsize=22)
 plt.xlabel('Simulation Time(second)',fontsize=22)
 plt.grid()
 plt.show()
-
+'''
 
 plt.plot(STD_withGrant_PreStatus['initate MTCD'],label= 'STD',color='dodgerblue')
 plt.plot(OptimalACB_NoSIB_PreStatus['initate MTCD'],label= 'Optimal ACB',color='c')

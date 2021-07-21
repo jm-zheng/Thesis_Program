@@ -21,7 +21,7 @@ print(Dense_Grouping_NOMA_allocation_RAtime["group"].value_counts().sort_index()
 
 plt.ylim(bottom=0)
 plt.xlim(left=-1)
-plt.title('Distribution of MTCDs Dense Position ( nMTCD = '+ dircectory_nMTCD+" )",fontsize=26)
+#plt.title('Distribution of MTCDs Dense Position ( nMTCD = '+ dircectory_nMTCD+" )",fontsize=26)
 
 plt.xticks(rotation=0)
 plt.yticks(np.arange(0,nMTCD_group_Yaxis[Dense_Axis_index],nMTCD_group_Yaxis_gap[Dense_Axis_index]),fontsize=16)
@@ -35,7 +35,7 @@ plt.show()
 nMTCD_group_Uniform = Uniform_Grouping_NOMA_allocation_RAtime["group"].value_counts().sort_index().plot.bar()
 plt.ylim(bottom=0)
 plt.xlim(left=-1)
-plt.title('Distribution of MTCDs Uniform Position ( nMTCD = '+ dircectory_nMTCD+" )",fontsize=26)
+#plt.title('Distribution of MTCDs Uniform Position ( nMTCD = '+ dircectory_nMTCD+" )",fontsize=26)
 
 plt.xticks(rotation=0)
 plt.yticks(np.arange(0,nMTCD_group_Yaxis[Uniform_Axis_index],nMTCD_group_Yaxis_gap[Uniform_Axis_index]),fontsize=16)

@@ -1,11 +1,11 @@
-rao1852
-success99037 fail: 963
-Complete Time:18.52s
-Average Access Delay:2.91629
+rao1880
+success99047 fail: 953
+Complete Time:18.8s
+Average Access Delay:2.88737
 100000
-collide probility:0.062335
-D2D total nRequest:707405
-D2D Average nRequest:7.07405
-RA total nTransmission:269083
-RA Average nTransmission:2.69083
-Drop rate:0.963%
+collide probility:0.0621257
+D2D total nRequest:705448
+D2D Average nRequest:7.05448
+RA total nTransmission:268847
+RA Average nTransmission:2.68847
+Drop rate:0.953%

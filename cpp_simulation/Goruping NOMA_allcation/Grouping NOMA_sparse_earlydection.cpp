@@ -2,10 +2,10 @@
 
 using namespace std;
 
-string directory_nMTCD ="10K";
+string directory_nMTCD ="150K";
 const int nGroup =50; // group的數量
-const int nMTCD =10000;
-const int simRAo = 1500; // 1=10ms 20s
+const int nMTCD =150000;
+const int simRAo = 8800; // 1=10ms 20s
 const int Backoff_D2D = 40; //D2D backoff
 const int Backoff_RA = 20; //RA backoff
 const int D2D_cycle =8; //D2D_cycle 80ms =8 RAO
@@ -25,6 +25,8 @@ double PACB_SharePremble=0 ;  // 用於SIB2 cycle broadcast for PACB of MTCD
 double nMTCDinit_SharePremble[SIB2_cycle]={0}; //記錄一個SIB2週期面RAO有幾個MTCD使用Sharepreamble發起Msg1的數量  為了算出每個RAO的PACB
 double PACB_RAO_SIB2cycle[SIB2_cycle]={0};      //記錄一個SIB2週期裡RAO PACB是多少                               為了算出PACB_SharePremble
 double PACB_eachRAO[simRAo]={0};
+
+double MTCD_RA_probility[nMTCD+1]={0};  //統一使用同一個RA set
 
 int RAtime[6][nMTCD] = {{0}}; //0: initiate RA time   1: first RA time    2: success RA time  3: RA retransmission times 4:group index 5:Access Delay
 int PreStatus[5][simRAo]={0}; //0: number of device initiate RA    1: emtpyPre    2: colliPre    3: successPre 4:not ULgrant
@@ -115,19 +117,50 @@ int main()
 	}
 	beta_proability_ac[beta_RAo] = 1;
 
+    //-------RA 機率統一------------------------
+    fstream file_RA_probility;
+    file_RA_probility.open("..\\STD\\RA_probility\\"+directory_nMTCD+"\\RA_probility.csv" , fstream:: in);
+    if (file_RA_probility.is_open())
+	{
+       // cout <<"XDD";
+        string str1;
+        int x=1;
+        while(file_RA_probility>>str1)
+        {
+            MTCD_RA_probility[x]=stod(str1);
+            x++;
+        }
+    }
+    file_RA_probility.close();
+    //-------------------------------------
+
+  /*  fstream file_RA_Beta;
+	file_RA_Beta.open("..\\STD\\RA_probility\\"+directory_nMTCD+"\\RA_Beta.csv" , fstream:: in);
+    if (file_RA_Beta.is_open())
+	{
+        string str1;
+        int x=0;
+        while(file_RA_Beta>>str1)
+        {
+            beta_proability_ac[x]=stod(str1);
+            x++;
+        }
+    }
+	file_RA_Beta.close();*/
+
 
 //-------分配each MTCD D2D first initate---------------------------------------------------------------------------
 	for(int i=1; i<=nMTCD; i++)  // 只有這裡是要i=1 因為配合 MTCD編號
 	{
 
-		double P =(double)rand()/(RAND_MAX+1); //0~32767/32768 compare beta proability  機率最大必須小於1
+		//double P =(double)rand()/(RAND_MAX+1); //0~32767/32768 compare beta proability  機率最大必須小於1
         DEVICE dev;
         dev.MTCD_number=i;
         int g = ( rand()%nGroup)+1; // Get the group index
         dev.group = g;
         for(int b=0; b<beta_RAo; b++)
         {
-            if(P <  beta_proability_ac[b])
+            if(MTCD_RA_probility[i] <  beta_proability_ac[b])
             {
                 //cout <<"b:"<<b<<endl;
                 dev.D2D_first_request_RAO=b;
@@ -196,6 +229,7 @@ int main()
 			// Confirm D2D initate request RAO &&  確認 MTCD status 是 D2D_init &&  Whether the number of MTCD RA transmissions exceeds && whether MTCD success RA
 			if(MTCD_Table.at(i).D2D_initate_request_RAO == Now_RAO   && MTCD_Table.at(i).MTCD_RA_status == "D2D_init"&& MTCD_Table.at(i).nTransmit_RA < MAX_nTransmit_RA )
 			{
+
 				MTCD_Table.at(i).nRequest_D2D +=1;  						//MTCD 的D2D Request 次數+1
                 D2D_total_request_eachGroup[MTCD_Table.at(i).group][Now_RAO] +=1;  //記錄D2D各組的Request次數，為了輸出檔案用的
 

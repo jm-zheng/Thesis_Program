@@ -1,11 +1,11 @@
-rao2564
-success148325 fail: 1675
-Complete Time:25.64s
-Average Access Delay:5.71629
+rao2535
+success148283 fail: 1717
+Complete Time:25.35s
+Average Access Delay:5.72156
 150000
-collide probility:0.0666566
-D2D total nRequest:1327576
-D2D Average nRequest:8.85051
-RA total nTransmission:470176
-RA Average nTransmission:3.13451
-Drop rate:1.11667%
+collide probility:0.0669954
+D2D total nRequest:1329123
+D2D Average nRequest:8.86082
+RA total nTransmission:470457
+RA Average nTransmission:3.13638
+Drop rate:1.14467%

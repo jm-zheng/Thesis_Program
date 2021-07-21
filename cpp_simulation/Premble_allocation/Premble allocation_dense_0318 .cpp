@@ -13,6 +13,8 @@ const int MAX_nTransmit_RA = 10; //RA MAX nTransmit_RA
 const int nSharePre = 6;    	 // sharepreamle 數量
 double PACB_share_premble=0.005 ;  // 用於SIB2 cycle broadcast for PACB of MTCD
 
+double MTCD_RA_probility[nMTCD+1]={0};  //統一使用同一個RA set
+
 const int beta_a = 3;
 const int beta_b = 4;
 const int beta_RAo = 1000; // 1=10ms
@@ -105,6 +107,22 @@ int main()
 	}
 	beta_proability_ac[beta_RAo] = 1;
 
+    //-------RA 機率統一------------------------
+    fstream file_RA_probility;
+    file_RA_probility.open("..\\STD\\RA_probility\\"+directory_nMTCD+"\\RA_probility.csv" , fstream:: in);
+    if (file_RA_probility.is_open())
+	{
+       // cout <<"XDD";
+        string str1;
+        int x=1;
+        while(file_RA_probility>>str1)
+        {
+            MTCD_RA_probility[x]=stod(str1);
+            x++;
+        }
+    }
+    file_RA_probility.close();
+    //-------------------------------------
 
 //-------分配each MTCD D2D first initate---------------------------------------------------------------------------
 	for(int i=1; i<=nMTCD; i++)  // 只有這裡是要i=1 因為配合 MTCD編號
@@ -117,7 +135,7 @@ int main()
         dev.group = g;
         for(int b=0; b<beta_RAo; b++)
         {
-            if(P <  beta_proability_ac[b])
+            if(MTCD_RA_probility[i] <  beta_proability_ac[b])
             {
                 //cout <<"b:"<<b<<endl;
                 dev.D2D_first_request_RAO=b;

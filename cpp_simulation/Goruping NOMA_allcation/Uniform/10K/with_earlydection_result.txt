@@ -1,11 +1,11 @@
-rao928
+rao960
 success10000 fail: 0
-Complete Time:9.28s
-Average Access Delay:0.135901
+Complete Time:9.6s
+Average Access Delay:0.135979
 10000
 collide probility:0
-D2D total nRequest:14983
-D2D Average nRequest:1.4983
+D2D total nRequest:14943
+D2D Average nRequest:1.4943
 RA total nTransmission:10000
 RA Average nTransmission:1
 Drop rate:0%
